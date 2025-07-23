@@ -1,0 +1,2388 @@
+
+
+📁 Directory: C:\Users\shop\vnr-final\app
+- app/
+    - favicon.ico
+    - globals.css
+    - layout.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\layout.tsx -----
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const inter = Inter({ subsets: ["latin"] });
+
+// The metadata object tells search engines about your site
+export const metadata: Metadata = {
+  title: 'VNR | Strategic Wealth & Tax Experts',
+  // CORRECTED: Added the essential meta description
+  description: 'Your premier partner in strategic tax advisory, business structuring, and intergenerational wealth planning for South Africa’s leading families and businesses.',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+----- END FILE: C:\Users\shop\vnr-final\app\layout.tsx -----
+
+    - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\page.tsx -----
+import Hero from "../components/Hero";
+import TeamSection from "../components/TeamSection";
+import ServicesSection from "../components/ServicesSection";
+import InsightsSection from "../components/InsightsSection"; // Import the new section
+import CtaSection from "../components/CtaSection";
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <TeamSection />
+      <ServicesSection />
+      <InsightsSection /> {/* Add it here */}
+      <CtaSection />
+    </>
+  );
+}
+----- END FILE: C:\Users\shop\vnr-final\app\page.tsx -----
+
+    - contact/
+        - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\contact\page.tsx -----
+'use client';
+
+import React from 'react';
+import { Mail, Phone, Building, Clock } from 'lucide-react';
+import ContactHero from '@/components/ContactHero';
+import InfoCard from '@/components/InfoCard';
+import FaqItem from '@/components/FaqItem';
+import { faqs } from '@/data/contact-data';
+
+const ContactPage = () => {
+  return (
+    <>
+      <ContactHero />
+
+      <div className="container mx-auto px-6 py-16 sm:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* --- Left Column: Contact Form --- */}
+          <div className="bg-slate-50 p-8 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Send us a Message</h2>
+            <form action="#" method="POST" className="space-y-6">
+              <div>
+                <label htmlFor="full-name" className="block text-sm font-medium text-slate-700">Full Name</label>
+                <input
+                  type="text"
+                  name="full-name"
+                  id="full-name"
+                  autoComplete="name"
+                  className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  autoComplete="email"
+                  className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-slate-700">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                ></textarea>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* --- Right Column: Contact Details & Map --- */}
+          <div className="space-y-12">
+            <div className="space-y-8">
+              <InfoCard icon={<Mail size={24} />} title="Email Address">
+                <a href="mailto:info@vnr.co.za" className="text-teal-600 hover:text-teal-700">
+                  info@vnr.co.za
+                </a>
+              </InfoCard>
+              <InfoCard icon={<Phone size={24} />} title="Phone Number">
+                <a href="tel:+27126531633" className="text-teal-600 hover:text-teal-700">
+                  +27 12 653 1633
+                </a>
+              </InfoCard>
+              <InfoCard icon={<Building size={24} />} title="Office Address">
+                <p>1022 Saxby Avenue, Eldoraigne<br />Centurion, 0157, South Africa</p>
+              </InfoCard>
+              <InfoCard icon={<Clock size={24} />} title="Business Hours">
+                <p>Mon - Fri: 08:00 - 16:30</p>
+                <p>Sat - Sun: Closed</p>
+              </InfoCard>
+            </div>
+            <div className="h-64 rounded-lg overflow-hidden border">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d458002.09525288636!2d27.814916022334405!3d-26.25707486893284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95658517133f81%3A0xbac8ebf8c25bc2bf!2sVNR%20(Pty)%20Ltd!5e0!3m2!1sen!2sza!4v1753187356294!5m2!1sen!2sza"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="VNR Office Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-6 py-16 sm:py-24 max-w-4xl">
+          <h2 className="text-3xl font-bold text-slate-900 text-center mb-8">Quick Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <FaqItem key={index} question={faq.q}>
+                <div className="prose" dangerouslySetInnerHTML={{ __html: faq.a }} />
+              </FaqItem>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ContactPage;
+----- END FILE: C:\Users\shop\vnr-final\app\contact\page.tsx -----
+
+    - insights/
+        - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\insights\page.tsx -----
+'use client';
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
+import InsightsHero from '@/components/InsightsHero';
+import FeaturedArticleCard from '@/components/FeaturedArticleCard';
+import ArticleCard from '@/components/ArticleCard';
+import { insightsData } from '@/data/insights-data';
+import CtaSection from '@/components/CtaSection';
+
+const InsightsPage = () => {
+    const featuredArticle = insightsData.find(a => a.featured);
+    const regularArticles = insightsData.filter(a => !a.featured); 
+    
+    // Dynamically create categories from the data
+    const categories = ["All", ...new Set(insightsData.map(a => a.category))];
+    const [activeCategory, setActiveCategory] = useState("All");
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredArticles = regularArticles
+        .filter(article => activeCategory === "All" || article.category === activeCategory)
+        .filter(article => {
+            const term = searchTerm.toLowerCase();
+            return article.title.toLowerCase().includes(term) || article.excerpt.toLowerCase().includes(term);
+        });
+
+    return (
+        <>
+            <InsightsHero />
+            
+            <div className="py-16 sm:py-24 bg-slate-50">
+                {featuredArticle && <FeaturedArticleCard article={featuredArticle} />}
+
+                <div className="container mx-auto px-6 mt-16">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+                        <div className="flex flex-wrap gap-2">
+                            {categories.map(cat => (
+                                <button 
+                                    key={cat}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${activeCategory === cat ? 'bg-blue-700 text-white' : 'bg-white text-slate-700 hover:bg-slate-200 shadow-sm'}`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="relative w-full md:w-auto">
+                            <input 
+                                type="search" 
+                                placeholder="Search articles..." 
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full md:w-64 pl-10 pr-4 py-2 border border-slate-300 rounded-full" 
+                            />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredArticles.map((article) => (
+                            <ArticleCard key={article.slug} article={article} />
+                        ))}
+                    </div>
+                    
+                    {filteredArticles.length === 0 && (
+                        <div className="text-center py-16 col-span-full">
+                            <h3 className="text-xl font-semibold text-slate-700">No articles found</h3>
+                            <p className="text-slate-500 mt-2">Try adjusting your search or category filters.</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <CtaSection />
+        </>
+    );
+};
+
+export default InsightsPage;
+----- END FILE: C:\Users\shop\vnr-final\app\insights\page.tsx -----
+
+        - [slug]/
+            - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\insights\[slug]\page.tsx -----
+    import { insightsData } from '@/data/insights-data';
+    import { notFound } from 'next/navigation'; // This import should now resolve
+    import ArticleHero from '@/components/ArticleHero';
+    import KeyTakeaways from '@/components/KeyTakeaways';
+    import CtaSection from '@/components/CtaSection';
+    import LeadExpertCard from '@/components/LeadExpertCard';
+    import { teamData } from '@/data/team-data';
+    import type { Metadata } from 'next'; // This import should now resolve
+
+    // Define a type for the params object for clarity and type safety
+    interface InsightPageParams {
+      slug: string;
+    }
+
+    // generateStaticParams is used for Static Site Generation (SSG)
+    export async function generateStaticParams() {
+      return insightsData.map((article) => ({ slug: article.slug }));
+    }
+
+    // generateMetadata is used to dynamically generate SEO metadata for each insight page
+    export async function generateMetadata({ params }: { params: InsightPageParams }): Promise<Metadata> {
+      const article = insightsData.find((a) => a.slug === params.slug);
+      // Handle case where article might not be found for metadata
+      if (!article) {
+        return { title: 'Insight Not Found | VNR', description: 'The requested insight could not be found.' };
+      }
+      return {
+        title: `${article.title} | VNR`, // Removed optional chaining as article is now guaranteed
+        description: article.excerpt, // Removed optional chaining
+      };
+    }
+
+    // The main page component for a single insight article
+    const InsightPage = async ({ params }: { params: InsightPageParams }) => { 
+      const article = insightsData.find((a) => a.slug === params.slug);
+      if (!article) notFound(); // notFound() will stop execution here if article is undefined
+
+      // After notFound(), 'article' is guaranteed to be defined.
+      // Use non-null assertion operator (!) or rely on TypeScript's control flow analysis.
+      const expertBio = teamData.find(m => m.slug === article!.author.slug)?.intro || '';
+
+      return (
+        <>
+          {/* Article Hero section displaying article title, author, and image */}
+          <ArticleHero article={article!} /> {/* Use non-null assertion */}
+
+          <div className="bg-white py-16 sm:py-24">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                {/* Main article content area */}
+                <article className="lg:col-span-2 space-y-12">
+                  {/* Key Takeaways section */}
+                  <KeyTakeaways takeaways={article!.takeaways} /> {/* Use non-null assertion */}
+                  {/* Render article content using dangerouslySetInnerHTML, applying Tailwind Prose styles */}
+                  <section 
+                    className="prose prose-lg max-w-none prose-headings:text-slate-800 prose-p:text-slate-600 prose-ul:text-slate-600 prose-strong:text-slate-700"
+                    dangerouslySetInnerHTML={{ __html: article!.content }} // Use non-null assertion
+                  />
+                </article>
+
+                {/* Sidebar for Lead Expert Card */}
+                <aside className="space-y-8">
+                  <LeadExpertCard
+                    name={article!.author.name} // Use non-null assertion
+                    title={article!.author.title} // Use non-null assertion
+                    imageUrl={article!.author.imageUrl} // Use non-null assertion
+                  >
+                    {expertBio} {/* Pass the expert's bio content */}
+                  </LeadExpertCard>
+                </aside>
+
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action section */}
+          <CtaSection />
+        </>
+      );
+    };
+
+    export default InsightPage;
+    
+----- END FILE: C:\Users\shop\vnr-final\app\insights\[slug]\page.tsx -----
+
+    - services/
+        - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\services\page.tsx -----
+import Link from 'next/link';
+import { servicesData } from '@/data/services-data';
+import { Check, ArrowRight, Scale, Building2, GitBranchPlus, FileText, UserCheck, Cloud, Gavel } from 'lucide-react';
+import React from 'react';
+
+const iconMap: { [key: string]: React.ReactElement } = {
+  Scale: <Scale className="h-8 w-8 text-white" />,
+  Building2: <Building2 className="h-8 w-8 text-white" />,
+  GitBranchPlus: <GitBranchPlus className="h-8 w-8 text-white" />,
+  FileText: <FileText className="h-8 w-8 text-white" />,
+  UserCheck: <UserCheck className="h-8 w-8 text-white" />,
+  Cloud: <Cloud className="h-8 w-8 text-white" />,
+  Gavel: <Gavel className="h-8 w-8 text-white" />,
+};
+
+export const metadata = {
+  title: 'Our Services | VNR',
+  description: 'Explore the comprehensive suite of services offered by VNR, including expert tax advisory, business structuring, legacy planning, and financial reporting.',
+};
+
+const ServicesPage = () => {
+  return (
+    <div className="bg-white">
+      <section className="bg-slate-100 py-20 md:py-28">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+            Our Suite of Services
+          </h1>
+          <p className="mt-6 max-w-3xl mx-auto text-lg leading-8 text-gray-600">
+            Integrated solutions designed to protect your assets, minimize tax, and facilitate sustainable wealth. We provide the clarity and strategic guidance necessary to navigate your financial journey with confidence.
+          </p>
+        </div>
+      </section>
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {servicesData.map((service) => (
+              <Link
+                key={service.title}
+                href={`/services/${service.slug}`}
+                className="group relative flex flex-col rounded-2xl bg-slate-800 p-8 text-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-blue-600">
+                    {iconMap[service.icon]}
+                  </div>
+                  <h3 className="text-2xl font-bold">{service.title}</h3>
+                </div>
+                {/* Now using 'subtitle' as it's more concise for the card view */}
+                <p className="mt-6 flex-grow text-slate-300">{service.subtitle}</p>
+                <ul className="mt-6 space-y-3 pt-6 border-t border-slate-700">
+                  {service.details.map((detail) => (
+                    <li key={detail} className="flex items-start">
+                      <Check className="h-6 w-6 flex-shrink-0 text-green-400 mr-3" />
+                      <span className="text-slate-200">{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <ArrowRight className="h-6 w-6 text-white" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default ServicesPage;
+----- END FILE: C:\Users\shop\vnr-final\app\services\page.tsx -----
+
+        - [slug]/
+            - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\services\[slug]\page.tsx -----
+    import { servicesData } from '@/data/services-data';
+    import { notFound } from 'next/navigation'; // This import should now resolve
+    import ServiceHero from '@/components/ServiceHero';
+    import LeadExpertCard from '@/components/LeadExpertCard';
+    import FaqItem from '@/components/FaqItem';
+    import RelatedServices from '@/components/RelatedServices';
+    import CtaSection from '@/components/CtaSection';
+    import { teamData } from '@/data/team-data';
+    import type { Metadata } from 'next'; // This import should now resolve
+
+    // Define a type for the params object for clarity and type safety
+    interface ServicePageParams {
+      slug: string;
+    }
+
+    export async function generateStaticParams() {
+      return servicesData.map((service) => ({ slug: service.slug }));
+    }
+
+    export async function generateMetadata({ params }: { params: ServicePageParams }): Promise<Metadata> {
+      const service = servicesData.find((s) => s.slug === params.slug);
+      // Handle case where service might not be found for metadata
+      if (!service) {
+        return { title: 'Service Not Found | VNR Services', description: 'The requested service could not be found.' };
+      }
+      return {
+        title: `${service.title} | VNR Services`,
+        description: service.subtitle,
+      };
+    }
+
+    // The main page component for a single service
+    const ServicePage = async ({ params }: { params: ServicePageParams }) => { 
+      const service = servicesData.find((s) => s.slug === params.slug);
+      if (!service) notFound(); // notFound() will stop execution here if service is undefined
+
+      // After notFound(), 'service' is guaranteed to be defined.
+      // Use non-null assertion (!) or rely on TypeScript's control flow analysis.
+      const expertBio = teamData.find(m => m.slug === service!.leadExpert.slug)?.intro || '';
+
+      return (
+        <>
+          <ServiceHero 
+            title={service!.title} // Use non-null assertion
+            subtitle={service!.subtitle} // Use non-null assertion
+            imageUrl={service!.imageUrl} // Use non-null assertion
+          />
+
+          <div className="bg-slate-50 py-16 sm:py-24">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <article className="lg:col-span-2 space-y-12">
+                  <section 
+                    className="prose prose-lg max-w-none prose-h2:text-3xl prose-h2:font-bold prose-h2:text-slate-900 prose-h2:tracking-tight"
+                    dangerouslySetInnerHTML={{ __html: service!.content }} // Use non-null assertion
+                  />
+                  {service!.faqs && service!.faqs.length > 0 && ( // Use non-null assertion
+                    <section>
+                      <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+                      <div className="mt-6">
+                        {service!.faqs.map((faq, index) => ( // Use non-null assertion
+                          <FaqItem key={index} question={faq.q}>
+                            {faq.a}
+                          </FaqItem>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+                </article>
+
+                <aside className="space-y-8">
+                  <LeadExpertCard
+                    name={service!.leadExpert.name} // Use non-null assertion
+                    title={service!.leadExpert.title} // Use non-null assertion
+                    imageUrl={service!.leadExpert.imageUrl} // Use non-null assertion
+                  >
+                    {expertBio}
+                  </LeadExpertCard>
+                </aside>
+
+              </div>
+            </div>
+          </div>
+
+          <RelatedServices />
+          <CtaSection />
+        </>
+      );
+    };
+
+    export default ServicePage;
+    
+----- END FILE: C:\Users\shop\vnr-final\app\services\[slug]\page.tsx -----
+
+    - team/
+        - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\team\page.tsx -----
+import Image from 'next/image';
+import Link from 'next/link';
+import { teamData } from '../../data/team-data';
+import { Linkedin, Mail, ArrowUpRight, Award, ShieldCheck } from 'lucide-react';
+
+export const metadata = {
+  title: 'Our Team of Experts | VNR',
+  description: 'Meet the team of seasoned financial and tax experts at VNR. Our leadership is dedicated to providing strategic foresight and meticulous guidance for your wealth in Centurion and across South Africa.',
+};
+
+const TeamPage = () => {
+  return (
+    <div className="bg-white">
+      {/* 1. Page Hero */}
+      <section className="bg-slate-100 py-20 md:py-28">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+            Meet Our Experts
+          </h1>
+          <p className="mt-6 max-w-2xl mx-auto text-lg leading-8 text-gray-600">
+            Our strength lies in our people. We are a collective of seasoned professionals committed to the financial success and security of our clients.
+          </p>
+        </div>
+      </section>
+
+      {/* 2. Leadership Cadre Section (MOVED UP) */}
+      <section className="bg-slate-50 py-20 md:py-28">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Our Leadership Cadre
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {teamData.map((member) => (
+              <div key={member.slug} className="group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg">
+                <div className="p-8 text-center">
+                  <Image
+                    className="mx-auto h-36 w-36 rounded-full object-cover ring-4 ring-slate-700 transition-all duration-300 group-hover:ring-blue-500"
+                    src={member.imageUrl}
+                    alt={member.name}
+                    width={144}
+                    height={144}
+                  />
+                  <div className="mt-6">
+                    <h3 className="text-xl font-semibold text-white">{member.name}</h3>
+                    <p className="mt-1 text-base text-blue-300">{member.title}</p>
+                  </div>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 translate-y-full transform transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+                  <div className="flex items-center justify-center gap-x-4 bg-slate-900/80 p-4 backdrop-blur-sm">
+                    <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors" aria-label={`${member.name}&apos;s LinkedIn`}>
+                      <Linkedin size={24} />
+                    </Link>
+                    <Link href={`mailto:${member.email}`} className="text-slate-300 hover:text-white transition-colors" aria-label={`Email ${member.name}`}>
+                      <Mail size={24} />
+                    </Link>
+                    <Link href={`/team/${member.slug}`} className="text-slate-300 hover:text-white transition-colors" aria-label={`View profile for ${member.name}`}>
+                      <ArrowUpRight size={24} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Our Approach Section */}
+      <section className="py-20 md:py-28">
+          <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                  <div>
+                      <div className="flex items-center gap-4">
+                          <Award className="h-10 w-10 text-blue-600 flex-shrink-0" />
+                          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Ability Should Be Rewarded</h2>
+                      </div>
+                      <p className="mt-4 text-lg text-gray-600">
+                          Our foundational belief is that capable entrepreneurs and businesses deserve a strategic partner that enables their success. We position our services as a direct investment in your potential and ambition.
+                      </p>
+                  </div>
+                  <div>
+                      <div className="flex items-center gap-4">
+                          <ShieldCheck className="h-10 w-10 text-blue-600 flex-shrink-0" />
+                          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Facilitating Sustainable Wealth</h2>
+                      </div>
+                      <p className="mt-4 text-lg text-gray-600">
+                          Our mission extends beyond short-term gains. We focus on long-term financial health, asset protection, and strategic legacy planning to ensure your prosperity endures for generations.
+                      </p>
+                  </div>
+              </div>
+              <div className="relative h-96 lg:h-full w-full rounded-2xl overflow-hidden">
+                  <Image 
+                      src="/images/slider/strategic-business-growth-south-africa.jpg" 
+                      alt="Strategic planning session"
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+              </div>
+          </div>
+      </section>
+
+      {/* 4. Accreditations Section */}
+      <section className="bg-slate-50 py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold text-gray-900">Verifiable Authority. Unwavering Trust.</h2>
+          <p className="mt-4 text-lg text-gray-600">Our expertise is recognized by the industry&apos;s most respected governing bodies.</p>
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-8 items-center max-w-4xl mx-auto">
+              <div className="text-center">
+                  <p className="text-xl font-bold text-slate-700">SAIPA</p>
+                  <p className="text-sm text-slate-500">South African Institute of Professional Accountants</p>
+              </div>
+              <div className="text-center">
+                  <p className="text-xl font-bold text-slate-700">SAIT</p>
+                   <p className="text-sm text-slate-500">South African Institute of Tax Professionals</p>
+              </div>
+              <div className="text-center col-span-2 md:col-span-1">
+                   <p className="text-xl font-bold text-slate-700">Sage Platinum Partner</p>
+                   <p className="text-sm text-slate-500">Highest Tier of Expertise</p>
+              </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default TeamPage;
+
+----- END FILE: C:\Users\shop\vnr-final\app\team\page.tsx -----
+
+        - [slug]/
+            - page.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\app\team\[slug]\page.tsx -----
+import { teamData } from '@/data/team-data';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Linkedin, Mail, CheckCircle } from 'lucide-react';
+import { notFound } from 'next/navigation';
+
+export async function generateStaticParams() {
+  return teamData.map((member) => ({
+    slug: member.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const member = teamData.find((m) => m.slug === params.slug);
+  if (!member) {
+    return { title: 'Team Member Not Found' };
+  }
+  return {
+    title: `${member.name} - ${member.title} | VNR`,
+    description: member.intro,
+  };
+}
+
+const TeamMemberPage = ({ params }: { params: { slug: string } }) => {
+  const member = teamData.find((m) => m.slug === params.slug);
+
+  if (!member) {
+    notFound();
+  }
+
+  return (
+    <div className="bg-white text-slate-800">
+      {/* Profile Hero Section */}
+      <div className="bg-slate-50 border-b border-slate-200">
+        <div className="container mx-auto max-w-5xl px-6 py-16 text-center md:text-left">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{member.name}</h1>
+          <h2 className="mt-2 text-xl font-semibold text-blue-700">{member.title}</h2>
+          <blockquote className="mt-6 max-w-3xl mx-auto md:mx-0 border-l-4 border-blue-600 pl-6">
+            <p className="text-lg italic text-slate-600">{member.intro}</p>
+          </blockquote>
+        </div>
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="container mx-auto max-w-5xl px-6 py-16 sm:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          
+          {/* Left Sticky Column */}
+          <div className="md:col-span-1">
+            <div className="sticky top-28">
+              <Image
+                src={member.imageUrl}
+                alt={member.name}
+                width={500}
+                height={500}
+                className="rounded-2xl object-cover aspect-square"
+                priority
+              />
+              <div className="mt-6 flex space-x-4">
+                 <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors" aria-label={`${member.name}'s LinkedIn`}>
+                    <Linkedin size={24} />
+                  </Link>
+                  <Link href={`mailto:${member.email}`} className="text-gray-400 hover:text-blue-600 transition-colors" aria-label={`Email ${member.name}`}>
+                    <Mail size={24} />
+                  </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Scrollable Column */}
+          <div className="md:col-span-2">
+            <div
+              className="prose prose-lg prose-slate max-w-none prose-h3:text-blue-800 prose-h3:border-b prose-h3:pb-2"
+              dangerouslySetInnerHTML={{ __html: member.bio }}
+            />
+            
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-blue-800 border-b pb-2 mb-6">Credentials</h3>
+              <ul className="space-y-3">
+                {member.credentials.map((cred) => (
+                  <li key={cred} className="flex items-start">
+                    <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 text-lg">{cred}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {member.articles && member.articles.length > 0 && (
+                <div className="mt-12">
+                    <h3 className="text-2xl font-bold text-blue-800 border-b pb-2 mb-6">Published Insights</h3>
+                    <ul className="space-y-2">
+                        {member.articles.map(article => (
+                            <li key={article.title}>
+                                <Link href={article.url} className="text-lg text-blue-600 hover:underline">
+                                    {article.title}
+                                </Link>
+                                <span className="text-sm text-slate-500 ml-2">({article.category})</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TeamMemberPage;
+----- END FILE: C:\Users\shop\vnr-final\app\team\[slug]\page.tsx -----
+
+
+
+📁 Directory: C:\Users\shop\vnr-final\components
+- components/
+    - ArticleCard.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\ArticleCard.tsx -----
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Article } from '@/data/insights-data';
+
+const ArticleCard = ({ article }: { article: Article }) => (
+  <Link href={`/insights/${article.slug}`} className="group block">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+      <div className="relative h-56 w-full">
+        <Image
+          src={article.imageUrl}
+          alt={article.title}
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        />
+      </div>
+      <div className="flex flex-1 flex-col justify-between bg-white p-6">
+        <div>
+          <p className="text-sm font-semibold text-blue-600">{article.category}</p>
+          <p className="mt-2 text-xl font-bold text-gray-900 group-hover:text-blue-700">
+            {article.title}
+          </p>
+           <p className="mt-3 text-sm text-gray-500 line-clamp-2">{article.excerpt}</p>
+        </div>
+        <div className="mt-6 flex items-center">
+          <div className="flex-shrink-0">
+            <Image
+              className="h-10 w-10 rounded-full object-cover"
+              src={article.author.imageUrl}
+              alt={article.author.name}
+              width={40}
+              height={40}
+            />
+          </div>
+          <div className="ml-3">
+            <p className="text-sm font-medium text-gray-900">{article.author.name}</p>
+            <p className="text-sm text-gray-500">{article.date}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Link>
+);
+
+export default ArticleCard;
+----- END FILE: C:\Users\shop\vnr-final\components\ArticleCard.tsx -----
+
+    - ArticleHero.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\ArticleHero.tsx -----
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import { Article } from '@/data/insights-data';
+
+const ArticleHero = ({ article }: { article: Article }) => (
+  <section className="relative h-96 bg-slate-800 text-white flex items-end">
+    <Image 
+      src={article.imageUrl} 
+      alt={article.title} 
+      fill 
+      priority
+      className="absolute inset-0 w-full h-full object-cover opacity-30" 
+      sizes="100vw"
+    />
+    <div className="relative z-10 container mx-auto px-6 py-12">
+      <p className="text-teal-400 font-semibold tracking-wider uppercase">{article.category}</p>
+      <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-2 max-w-4xl">{article.title}</h1>
+      <div className="mt-6 flex items-center text-sm">
+        <Image src={article.author.imageUrl} alt={article.author.name} width={48} height={48} className="w-12 h-12 rounded-full mr-4" />
+        <div>
+          <p className="font-semibold text-white">{article.author.name}</p>
+          <p className="text-slate-300">{article.date}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+export default ArticleHero;
+----- END FILE: C:\Users\shop\vnr-final\components\ArticleHero.tsx -----
+
+    - Breadcrumbs.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\Breadcrumbs.tsx -----
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
+
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+const Breadcrumbs = ({ items }: { items: BreadcrumbItem[] }) => {
+  return (
+    <nav aria-label="Breadcrumb">
+      <ol className="flex items-center space-x-2 text-sm">
+        {items.map((item, index) => (
+          <li key={item.name}>
+            <div className="flex items-center">
+              {index > 0 && <ChevronRight className="h-4 w-4 flex-shrink-0 text-gray-400 mr-2" />}
+              <Link
+                href={item.href}
+                className={`font-medium ${
+                  index === items.length - 1
+                    ? 'text-gray-500 pointer-events-none'
+                    : 'text-gray-400 hover:text-gray-700'
+                }`}
+              >
+                {item.name}
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+};
+
+export default Breadcrumbs;
+----- END FILE: C:\Users\shop\vnr-final\components\Breadcrumbs.tsx -----
+
+    - ContactHero.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\ContactHero.tsx -----
+'use client';
+import React from 'react';
+
+const ContactHero = () => (
+  <div className="bg-slate-50 border-b border-slate-200">
+    <div className="container mx-auto px-6 py-16 text-center">
+      <span className="text-blue-700 font-semibold tracking-wider uppercase">Contact Us</span>
+      <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2">Get in Touch</h1>
+      <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+        We are here to help you navigate your financial journey. Whether you have a question about our services or want to schedule a consultation, we look forward to hearing from you.
+      </p>
+    </div>
+  </div>
+);
+
+export default ContactHero;
+----- END FILE: C:\Users\shop\vnr-final\components\ContactHero.tsx -----
+
+    - CtaSection.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\CtaSection.tsx -----
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
+
+const CtaSection = () => {
+  return (
+    <section className="bg-gradient-to-r from-blue-800 to-teal-700">
+      <div className="container mx-auto px-6 py-20 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          Ready to Build Your Financial Future?
+        </h2>
+        <p className="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
+          Partner with a firm that understands your ambition. Schedule a no-obligation consultation to discover how our expertise can become your greatest asset.
+        </p>
+        <Link
+          href="/contact"
+          className="mt-8 inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-blue-800 bg-white hover:bg-blue-100 transition-all duration-300 transform hover:scale-105"
+        >
+          Schedule a Consultation
+          <ChevronRight className="w-5 h-5 ml-2" />
+        </Link>
+      </div>
+    </section>
+  );
+};
+
+export default CtaSection;
+----- END FILE: C:\Users\shop\vnr-final\components\CtaSection.tsx -----
+
+    - FaqAccordion.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\FaqAccordion.tsx -----
+'use client';
+
+import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+// Assuming FAQ type is imported from a data file like services-data or contact-data
+// The path might need adjustment based on where FaqAccordion is used and where FAQ is defined.
+// For consistency, let's assume it's used with the FAQ type from services-data.ts or a shared types file.
+import { FAQ } from '../data/services-data'; // Adjust path if FAQ is in a different data file or shared types
+
+const FaqAccordion = ({ faqs }: { faqs: FAQ[] }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="space-y-4">
+      {faqs.map((faq, index) => (
+        <div key={index} className="border-b border-gray-200 pb-4">
+          <button
+            onClick={() => toggleFaq(index)}
+            className="flex w-full items-center justify-between text-left"
+          >
+            {/* Corrected: Use faq.q instead of faq.question */}
+            <span className="text-lg font-medium text-gray-900">{faq.q}</span>
+            <ChevronDown
+              className={`h-6 w-6 text-gray-500 transition-transform duration-300 ${
+                openIndex === index ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          <div
+            className={`grid transition-all duration-300 ease-in-out ${
+              openIndex === index ? 'grid-rows-[1fr] opacity-100 pt-4' : 'grid-rows-[0fr] opacity-0'
+            }`}
+          >
+            <div className="overflow-hidden">
+              {/* Corrected: Use faq.a instead of faq.answer */}
+              <p className="text-base text-gray-600">{faq.a}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default FaqAccordion;
+
+----- END FILE: C:\Users\shop\vnr-final\components\FaqAccordion.tsx -----
+
+    - FaqItem.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\FaqItem.tsx -----
+'use client';
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+interface FaqItemProps {
+  question: string;
+  children: React.ReactNode;
+}
+
+const FaqItem: React.FC<FaqItemProps> = ({ question, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-200 py-4">
+      <button onClick={() => setIsOpen(!isOpen)} className="flex w-full items-center justify-between text-left">
+        <span className="text-lg font-medium text-slate-800">{question}</span>
+        <ChevronDown className={`h-5 w-5 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <div className="mt-4 text-slate-600">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default FaqItem;
+----- END FILE: C:\Users\shop\vnr-final\components\FaqItem.tsx -----
+
+    - FeaturedArticleCard.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\FeaturedArticleCard.tsx -----
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Article } from '@/data/insights-data';
+
+const FeaturedArticleCard = ({ article }: { article: Article }) => (
+  <div className="container mx-auto px-6">
+    <Link href={`/insights/${article.slug}`} className="block group bg-white rounded-2xl shadow-xl overflow-hidden md:grid md:grid-cols-2 hover:shadow-2xl transition-shadow duration-300">
+      <div className="relative h-64 md:h-auto">
+        <Image src={article.imageUrl} alt={article.title} fill sizes="50vw" className="object-cover" />
+      </div>
+      <div className="p-8 md:p-12 flex flex-col justify-center">
+        <span className="text-sm font-semibold text-teal-600 uppercase tracking-wider">{article.category}</span>
+        <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 group-hover:text-blue-800 transition-colors duration-300">{article.title}</h2>
+        <p className="mt-4 text-slate-500">{article.excerpt}</p>
+        <div className="mt-6 flex items-center text-sm">
+          <Image src={article.author.imageUrl} alt={article.author.name} width={40} height={40} className="w-10 h-10 rounded-full mr-3" />
+          <div>
+            <p className="font-semibold text-slate-800">{article.author.name}</p>
+            <p className="text-slate-500">{article.date}</p>
+          </div>
+        </div>
+      </div>
+    </Link>
+  </div>
+);
+
+export default FeaturedArticleCard;
+----- END FILE: C:\Users\shop\vnr-final\components\FeaturedArticleCard.tsx -----
+
+    - Footer.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\Footer.tsx -----
+import Link from 'next/link';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import React from 'react';
+
+const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <li className="mb-2">
+    <Link href={href} className="text-gray-200 transition-colors duration-300 hover:text-white">
+      {children}
+    </Link>
+  </li>
+);
+
+const Footer = () => {
+  return (
+    <footer className="bg-slate-800 text-white">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <h3 className="text-lg font-bold text-white">VNR</h3>
+            <p className="mt-4 text-sm text-gray-200">
+              Your premier partner in strategic tax advisory, business structuring, and intergenerational wealth planning.
+              We provide clarity and confidence for South Africa&apos;s leading families and businesses.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white">Services</h3>
+            <ul className="mt-4 space-y-2">
+              {/* Corrected closing tags for FooterLink */}
+              <FooterLink href="/services/tax-advisory">Tax Advisory</FooterLink>
+              <FooterLink href="/services/business-structuring">Business Structuring</FooterLink>
+              <FooterLink href="/services/legacy-planning">Estate Planning</FooterLink>
+              <FooterLink href="/services/financial-reporting">Financial Reporting</FooterLink>
+              <FooterLink href="/services">View All Services</FooterLink>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white">Quick Links</h3>
+            <ul className="mt-4 space-y-2">
+              <FooterLink href="/services">Services</FooterLink>
+              <FooterLink href="/team">Our Team</FooterLink>
+              <FooterLink href="/insights">Insights</FooterLink>
+              <FooterLink href="/contact">Contact</FooterLink>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white">Contact Us</h3>
+            <ul className="mt-4 space-y-3">
+              <li className="flex items-start">
+                <MapPin size={16} className="mr-3 mt-1 flex-shrink-0" />
+                <span className="text-sm text-gray-200">1022 Saxby Avenue, Eldoraigne, Centurion, 0157, South Africa</span>
+              </li>
+              <li className="flex items-center">
+                <Mail size={16} className="mr-3" />
+                <a href="mailto:info@vnr.co.za" className="text-sm text-gray-200 hover:text-white">info@vnr.co.za</a>
+              </li>
+              <li className="flex items-center">
+                <Phone size={16} className="mr-3" />
+                <a href="tel:+27126531633" className="text-sm text-gray-200 hover:text-white">+27 12 653 1633</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr className="my-8 border-slate-700" />
+        <div className="text-center text-sm text-gray-400">
+          © {new Date().getFullYear()} VNR. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+----- END FILE: C:\Users\shop\vnr-final\components\Footer.tsx -----
+
+    - Header.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\Header.tsx -----
+'use client';
+
+import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Home, Briefcase, Users, Newspaper, Mail, Phone, Menu, X } from 'lucide-react';
+
+// This component now has the correct logic for the active state
+const NavItem = ({ href, Icon, children }: { href: string; Icon: React.ElementType; children: React.ReactNode }) => {
+  const pathname = usePathname();
+  // An item is active ONLY if the pathnames match exactly.
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      href={href}
+      className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 ${
+        isActive
+          ? 'bg-cyan-600 text-white shadow-inner' // Active style
+          : 'text-white/80 hover:bg-white/20 hover:text-white' // Inactive style
+      }`}
+    >
+      <Icon className="h-5 w-5" />
+      {children}
+    </Link>
+  );
+};
+
+const Header = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Corrected: All links point to their REAL destinations.
+  const navLinks = [
+    { href: '/', label: 'Home', Icon: Home },
+    { href: '/services', label: 'Services', Icon: Briefcase },
+    { href: '/team', label: 'Our Team', Icon: Users },
+    { href: '/insights', label: 'Insights', Icon: Newspaper },
+    { href: '/contact', label: 'Contact', Icon: Mail },
+  ];
+
+  return (
+    <header className="bg-gradient-to-r from-blue-800 to-teal-700 text-white shadow-lg sticky top-0 z-50">
+      <div className="container mx-auto flex h-20 items-center justify-between px-6">
+        <Link href="/" aria-label="VNR Home Page">
+          <Image src="/logo.png" alt="VNR Logo" width={110} height={40} priority />
+        </Link>
+
+        <nav className="hidden items-center space-x-2 md:flex">
+          {navLinks.map((link) => (
+            <NavItem key={link.label} href={link.href} Icon={link.Icon}>
+              {link.label}
+            </NavItem>
+          ))}
+        </nav>
+
+        <div className="flex items-center">
+          <a
+            href="tel:+27126531633"
+            className="hidden items-center rounded-full bg-white px-5 py-2.5 text-sm font-bold text-blue-800 transition-transform duration-300 hover:scale-105 lg:inline-flex"
+          >
+            <Phone className="mr-2 h-5 w-5" />
+            Call Us
+          </a>
+
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="ml-4 p-2 md:hidden"
+            aria-label="Open menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-50 transform bg-slate-900/80 backdrop-blur-sm transition-opacity md:hidden ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`absolute right-0 top-0 h-full w-full max-w-xs transform bg-white p-6 text-slate-800 shadow-xl transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold">Menu</h2>
+                <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+                    <X className="h-6 w-6" />
+                </button>
+            </div>
+            <nav className="mt-8 flex flex-col space-y-2">
+                {navLinks.map((link) => (
+                    <Link
+                        key={link.label}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-lg p-3 text-lg font-medium hover:bg-gray-100"
+                    >
+                        <link.Icon className="h-6 w-6 text-blue-700" />
+                        {link.label}
+                    </Link>
+                ))}
+            </nav>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+----- END FILE: C:\Users\shop\vnr-final\components\Header.tsx -----
+
+    - Hero.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\Hero.tsx -----
+// components/Hero.tsx
+'use client'; // This directive is necessary as the component uses client-side React hooks (useState, useEffect)
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image'; // Use Next.js Image component for optimized images
+import Link from 'next/link';   // Use Next.js Link component for optimized client-side navigation
+import { ShieldCheck } from 'lucide-react'; // Use lucide-react for the icon
+
+// Import the slides data from the newly created data file
+import { slidesData } from '@/data/hero-slides'; // Assuming '@/data' alias is configured in your Next.js project
+
+const Hero = () => {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // useEffect hook to manage the autoplay functionality of the slider.
+  // It sets up an interval to change slides automatically unless the user is hovering over the slider.
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined; // Explicitly type 'interval' to fix TypeScript warning
+    if (!isHovered) {
+      // Set an interval to advance to the next slide every 5 seconds (5000 milliseconds).
+      interval = setInterval(() => {
+        setCurrentSlideIndex((prevIndex) =>
+          // If it's the last slide, go back to the first slide (0), otherwise go to the next slide.
+          prevIndex === slidesData.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 5000);
+    }
+    // Cleanup function: Clear the interval when the component unmounts or when isHovered changes.
+    return () => {
+      if (interval) { // Ensure interval exists before clearing
+        clearInterval(interval);
+      }
+    };
+  }, [isHovered]); // Re-run effect only when isHovered state changes
+
+  // Function to navigate to the next slide.
+  const goToNextSlide = () => {
+    setCurrentSlideIndex((prevIndex) =>
+      // If it's the last slide, loop back to the first, otherwise increment.
+      prevIndex === slidesData.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Function to navigate to the previous slide.
+  const goToPrevSlide = () => {
+    setCurrentSlideIndex((prevIndex) =>
+      // If it's the first slide, loop to the last, otherwise decrement.
+      prevIndex === 0 ? slidesData.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Get the data for the currently active slide.
+  const currentSlide = slidesData[currentSlideIndex];
+
+  return (
+    <section 
+      // Main container for the hero section.
+      // Adjusted height to fill the remaining viewport space below the header (assuming header is h-20).
+      // Uses Tailwind CSS for responsive height, text color, flex properties, and overflow hiding.
+      className="relative text-white min-h-[calc(100vh-theme(spacing.20))] flex items-center overflow-hidden"
+      // Event handlers to pause/resume autoplay on mouse hover.
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Background Image with Overlay */}
+      {/* Next.js Image component is used for automatic image optimization (resizing, formats, lazy loading). */}
+      <Image
+        src={currentSlide.imageUrl} // Dynamic image source from current slide data
+        alt={currentSlide.altText} // Dynamic alt text for accessibility and SEO
+        fill // 'fill' prop makes the image cover the entire parent element
+        priority={currentSlideIndex === 0} // Prioritize loading only the first slide's image for LCP optimization
+        sizes="100vw" // Defines image sizes for responsive loading across different viewports
+        // Transition for smooth image changes between slides.
+        className="object-cover opacity-30 transition-opacity duration-1000 ease-in-out" 
+      />
+      
+      {/* Dark Overlay for Text Readability */}
+      {/* Creates a semi-transparent dark gradient overlay for better text contrast over the background image. */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-800/60"></div>
+
+      {/* Content Container */}
+      {/* Holds all the text, CTA button, and accreditation badge. */}
+      <div className="relative container mx-auto px-6 z-10">
+        {/* Max width for content, and transitions for smooth slide content changes. */}
+        <div className="max-w-3xl transition-all duration-1000 ease-in-out transform opacity-100 translate-y-0">
+          {/* Main Headline */}
+          {/* Dynamically splits the headline by '. ' to allow for line breaks, improving readability. */}
+          <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
+            {currentSlide.headline.split('. ').map((part, index) => (
+              <React.Fragment key={index}>
+                {part}
+                {index < currentSlide.headline.split('. ').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </h1>
+
+          {/* Subheading/Description */}
+          <p className="mt-6 max-w-xl text-lg text-gray-200">
+            {currentSlide.description}
+          </p>
+
+          {/* Call to Action Button */}
+          <div className="mt-8 flex flex-wrap gap-4">
+            {/* Next.js Link component for client-side navigation, enhancing performance. */}
+            <Link
+              href={currentSlide.ctaHref} // Dynamic CTA link
+              className="inline-block rounded-md bg-blue-600 px-8 py-3 text-center font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+            >
+              {currentSlide.ctaText} {/* Dynamic CTA text */}
+            </Link>
+          </div>
+          
+          {/* Accreditation/Trust Badge */}
+          <div className="mt-8 flex items-center gap-2 text-sm text-gray-300">
+            {/* Lucide React ShieldCheck icon for visual accreditation. */}
+            <ShieldCheck size={16} /> 
+            <span>{currentSlide.accreditation}</span> {/* Dynamic accreditation text */}
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      {/* Button for navigating to the previous slide. */}
+      <button
+        onClick={goToPrevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full text-white z-20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
+        aria-label="Previous slide" // Accessible label for screen readers
+      >
+        {/* SVG icon for left arrow. */}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+      {/* Button for navigating to the next slide. */}
+      <button
+        onClick={goToNextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full text-white z-20 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white"
+        aria-label="Next slide" // Accessible label for screen readers
+      >
+        {/* SVG icon for right arrow. */}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </button>
+
+      {/* Slide Indicators (Dots) */}
+      {/* Displays a row of dots at the bottom, indicating the current slide and allowing direct navigation. */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+        {slidesData.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlideIndex(index)} // Sets the current slide to the clicked dot's index
+            className={`h-3 w-3 rounded-full transition-all duration-300 ${
+              currentSlideIndex === index ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70' // Active dot is wider and solid white
+            }`}
+            aria-label={`Go to slide ${index + 1}`} // Accessible label for screen readers
+          ></button>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
+
+----- END FILE: C:\Users\shop\vnr-final\components\Hero.tsx -----
+
+    - InfoCard.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\InfoCard.tsx -----
+'use client';
+import React from 'react';
+
+interface InfoCardProps {
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}
+
+const InfoCard: React.FC<InfoCardProps> = ({ icon, title, children }) => (
+  <div className="flex items-start">
+    <div className="flex-shrink-0 h-12 w-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center">
+      {icon}
+    </div>
+    <div className="ml-4">
+      <h3 className="text-lg font-semibold text-slate-800">{title}</h3>
+      <div className="text-slate-500 mt-1">{children}</div>
+    </div>
+  </div>
+);
+
+export default InfoCard;
+----- END FILE: C:\Users\shop\vnr-final\components\InfoCard.tsx -----
+
+    - InsightsHero.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\InsightsHero.tsx -----
+'use client';
+import React from 'react';
+
+const InsightsHero = () => (
+  <div className="bg-slate-50">
+    <div className="container mx-auto px-6 py-16 text-center">
+      <span className="text-blue-700 font-semibold tracking-wider uppercase">Insights & Expertise</span>
+      <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2">Your Knowledge Hub</h1>
+      <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+        Your resource for expert analysis on South African tax, wealth management, and business growth. Stay ahead with knowledge from industry leaders.
+      </p>
+    </div>
+  </div>
+);
+
+export default InsightsHero;
+----- END FILE: C:\Users\shop\vnr-final\components\InsightsHero.tsx -----
+
+    - InsightsSection.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\InsightsSection.tsx -----
+import Link from 'next/link';
+import Image from 'next/image';
+import { insightsData } from '../data/insights-data'; // Using a relative path
+
+const InsightsSection = () => {
+  // Find the first featured article
+  const featuredArticle = insightsData.find(insight => insight.featured);
+
+  // Get the next 4 non-featured articles, ensuring the featured one is not duplicated
+  const otherArticles = insightsData
+    .filter(insight => !insight.featured || (featuredArticle && insight.slug !== featuredArticle.slug))
+    .slice(0, 4); // Changed to take only the first 4 other articles
+
+  return (
+    <section className="bg-white py-16 sm:py-24">
+      <div className="container mx-auto px-6">
+        <div className="text-center">
+          <h2 className="text-base font-semibold text-blue-600 tracking-wider uppercase">Latest Insights</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Navigating the Financial Landscape
+          </p>
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-600">
+            Stay ahead with our latest analysis, expert perspectives, and strategic guidance on the financial matters that impact you most.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch"> {/* Added items-stretch to make columns equal height */}
+          {/* Featured Article (Left Column on large screens) */}
+          {featuredArticle && (
+            <Link 
+              key={featuredArticle.slug} 
+              href={`/insights/${featuredArticle.slug}`} 
+              className="group block lg:col-span-2"
+            >
+              <div className="flex flex-col overflow-hidden rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-blue-50 h-full"> {/* Added h-full */}
+                <div className="relative w-full h-72 md:h-96"> {/* Fixed height for the image container */}
+                  <Image
+                    src={featuredArticle.imageUrl}
+                    alt={featuredArticle.title}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 66vw, 100vw"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    <p className="text-sm font-medium text-blue-700">{featuredArticle.category}</p>
+                    <p className="mt-2 text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-700">
+                      {featuredArticle.title}
+                    </p>
+                    <p className="mt-3 text-base text-gray-600 line-clamp-3">{featuredArticle.excerpt}</p>
+                  </div>
+                  <div className="mt-6 flex items-center">
+                    <div className="flex-shrink-0">
+                      <Image
+                        className="h-10 w-10 rounded-full object-cover"
+                        src={featuredArticle.author.imageUrl}
+                        alt={featuredArticle.author.name}
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-900">{featuredArticle.author.name}</p>
+                      <p className="text-sm text-gray-500">{featuredArticle.date}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {/* Other Articles (Right Column on large screens) */}
+          <div className="lg:col-span-1 flex flex-col justify-between h-full"> {/* Added justify-between and h-full */}
+            {otherArticles.map((insight) => (
+              <Link 
+                key={insight.slug} 
+                href={`/insights/${insight.slug}`} 
+                className="group block flex-grow" 
+              > {/* Removed extra '{' here */}
+                <div className="flex items-center gap-4 p-4 rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 bg-white h-full"> {/* Added h-full */}
+                  <div className="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden">
+                    <Image
+                      src={insight.imageUrl}
+                      alt={insight.title}
+                      fill
+                      className="object-cover"
+                      sizes="96px" // Fixed size for smaller images
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs font-medium text-blue-600">{insight.category}</p>
+                    <p className="mt-1 text-base font-semibold text-gray-900 group-hover:text-blue-700 line-clamp-2">
+                      {insight.title}
+                    </p>
+                    <div className="mt-2 flex items-center text-xs text-gray-500">
+                      <Image
+                        className="h-6 w-6 rounded-full object-cover mr-2"
+                        src={insight.author.imageUrl}
+                        alt={insight.author.name}
+                        width={24}
+                        height={24}
+                      />
+                      <span>{insight.author.name}</span>
+                      <span className="ml-2">| {insight.date}</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+        
+        <div className="mt-16 text-center">
+          <Link href="/insights" className="text-base font-semibold text-blue-600 hover:text-blue-800">
+            View all insights <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default InsightsSection;
+
+----- END FILE: C:\Users\shop\vnr-final\components\InsightsSection.tsx -----
+
+    - KeyTakeaways.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\KeyTakeaways.tsx -----
+'use client';
+import React from 'react';
+import { CheckCircle } from 'lucide-react';
+
+const KeyTakeaways = ({ takeaways }: { takeaways: string[] }) => (
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-slate-900 mb-4">Key Takeaways</h3>
+        <ul className="space-y-3">
+            {takeaways.map((item, index) => (
+                <li key={index} className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0" />
+                    <span className="text-slate-700">{item}</span>
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
+export default KeyTakeaways;
+----- END FILE: C:\Users\shop\vnr-final\components\KeyTakeaways.tsx -----
+
+    - LeadExpertCard.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\LeadExpertCard.tsx -----
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { UserCheck } from 'lucide-react';
+
+interface LeadExpertCardProps {
+  name: string;
+  title: string;
+  imageUrl: string;
+  children: React.ReactNode;
+}
+
+const LeadExpertCard: React.FC<LeadExpertCardProps> = ({ name, title, imageUrl, children }) => (
+  <div className="bg-white rounded-xl shadow-lg p-6 sticky top-28">
+    <h3 className="text-lg font-bold text-slate-800 mb-4 tracking-wide">Lead Expert</h3>
+    <div className="flex items-center space-x-4 mb-4">
+      <div className="relative w-16 h-16 rounded-full overflow-hidden">
+        <Image src={imageUrl} alt={name} fill sizes="64px" className="object-cover" />
+      </div>
+      <div>
+        <p className="font-bold text-slate-900">{name}</p>
+        <p className="text-sm text-teal-600 font-semibold">{title}</p>
+      </div>
+    </div>
+    <div className="text-sm text-slate-500 mb-6 prose prose-sm">{children}</div>
+    <Link href="/contact" className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-700 hover:bg-blue-800">
+      <UserCheck className="w-5 h-5 mr-2" /> Consult with {name.split(' ')[0]}
+    </Link>
+  </div>
+);
+
+export default LeadExpertCard;
+----- END FILE: C:\Users\shop\vnr-final\components\LeadExpertCard.tsx -----
+
+    - RelatedServices.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\RelatedServices.tsx -----
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import { Book, TrendingUp } from 'lucide-react';
+
+const RelatedServices = () => (
+  <section className="bg-slate-100 py-16 sm:py-24">
+    <div className="container mx-auto px-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-10">Explore Other Services</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <Link href="/services/tax-advisory" className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center space-x-4">
+          <div className="bg-teal-100 text-teal-600 p-3 rounded-full"><Book size={24} /></div>
+          <div>
+            <h3 className="font-bold text-slate-800">Tax Advisory & Compliance</h3>
+            <p className="text-sm text-slate-500 mt-1">Navigate complex tax landscapes with strategic foresight.</p>
+          </div>
+        </Link>
+        <Link href="/services/business-structuring" className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center space-x-4">
+          <div className="bg-teal-100 text-teal-600 p-3 rounded-full"><TrendingUp size={24} /></div>
+          <div>
+            <h3 className="font-bold text-slate-800">Business Structuring</h3>
+            <p className="text-sm text-slate-500 mt-1">Architect the optimal legal and financial structure for your enterprise.</p>
+          </div>
+        </Link>
+      </div>
+    </div>
+  </section>
+);
+
+export default RelatedServices;
+----- END FILE: C:\Users\shop\vnr-final\components\RelatedServices.tsx -----
+
+    - ServiceHero.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\ServiceHero.tsx -----
+'use client';
+import React from 'react';
+import Image from 'next/image';
+
+interface ServiceHeroProps {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
+
+const ServiceHero: React.FC<ServiceHeroProps> = ({ title, subtitle, imageUrl }) => (
+  <section className="relative h-80 bg-slate-800 text-white flex items-center justify-center">
+    <Image 
+      src={imageUrl} 
+      alt={title} 
+      fill 
+      priority
+      className="absolute inset-0 w-full h-full object-cover opacity-20" 
+      sizes="100vw"
+    />
+    <div className="relative z-10 text-center px-4">
+      <span className="text-teal-400 font-semibold tracking-wider uppercase">VNR Services</span>
+      <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-2">{title}</h1>
+      <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">{subtitle}</p>
+    </div>
+  </section>
+);
+
+export default ServiceHero;
+----- END FILE: C:\Users\shop\vnr-final\components\ServiceHero.tsx -----
+
+    - ServicesSection.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\ServicesSection.tsx -----
+import Link from 'next/link'; // Import Link for client-side navigation
+import { Scale, Building2, GitBranchPlus, BarChart3, Cloud, Gavel } from 'lucide-react';
+import { servicesData } from '../data/services-data'; // Import your services data
+
+// Map icons to their Lucide React components for dynamic rendering
+const iconMap: { [key: string]: React.ReactElement } = {
+  Scale: <Scale size={32} className="text-blue-600 group-hover:text-white" />,
+  Building2: <Building2 size={32} className="text-blue-600 group-hover:text-white" />,
+  GitBranchPlus: <GitBranchPlus size={32} className="text-blue-600 group-hover:text-white" />,
+  BarChart3: <BarChart3 size={32} className="text-blue-600 group-hover:text-white" />,
+  Cloud: <Cloud size={32} className="text-blue-600 group-hover:text-white" />,
+  Gavel: <Gavel size={32} className="text-blue-600 group-hover:text-white" />,
+};
+
+const ServicesSection = () => {
+  return (
+    <section className="bg-white py-16 sm:py-24">
+      <div className="container mx-auto px-6">
+        <div className="text-center">
+          <h2 className="text-base font-semibold text-blue-600 tracking-wider uppercase">Our Expertise</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            A Holistic Approach to Your Financial Legacy
+          </p>
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-600">
+            From foundational compliance to strategic growth and succession planning, we provide an integrated suite of services to protect and enhance your wealth.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {servicesData.map((service) => ( // Use servicesData from your data file
+            <Link 
+              key={service.slug} // Use slug as key for uniqueness
+              href={`/services/${service.slug}`} // Dynamically link to the single service page
+              className="group block" // Ensure the Link itself is a block for proper styling
+            >
+              <div 
+                className="p-8 bg-gray-50 rounded-xl border border-gray-200 transition-all duration-300 hover:bg-blue-600 hover:shadow-lg hover:-translate-y-1 h-full flex flex-col" // Added h-full and flex-col for consistent card height
+              >
+                <div className="flex-shrink-0">
+                  {iconMap[service.icon]} {/* Render icon based on mapping */}
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-gray-900 group-hover:text-white">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-base text-gray-600 group-hover:text-gray-200 flex-grow"> {/* Added flex-grow */}
+                  {service.subtitle} {/* Using subtitle as description for the card */}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ServicesSection;
+
+----- END FILE: C:\Users\shop\vnr-final\components\ServicesSection.tsx -----
+
+    - TeamSection.tsx
+
+----- START FILE: C:\Users\shop\vnr-final\components\TeamSection.tsx -----
+import Image from 'next/image';
+import Link from 'next/link';
+import { teamData } from '../data/team-data';
+import { Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+
+const TeamSection = () => {
+  const featuredMembers = teamData.slice(0, 3);
+
+  return (
+    <section className="bg-white py-16 sm:py-24">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-base font-semibold text-blue-600 tracking-wider uppercase">Our Leadership Cadre</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            The Architects of Your Financial Legacy
+          </p>
+          <p className="mt-6 text-lg text-gray-600">
+            Meet the seasoned experts dedicated to providing the strategic foresight and meticulous guidance your wealth deserves.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {featuredMembers.map((member) => (
+            <div key={member.slug} className="group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg">
+              <div className="p-8 text-center">
+                <Image
+                  className="mx-auto h-36 w-36 rounded-full object-cover ring-4 ring-slate-700 transition-all duration-300 group-hover:ring-blue-500"
+                  src={member.imageUrl}
+                  alt={member.name}
+                  width={144}
+                  height={144}
+                />
+                <div className="mt-6">
+                  <h3 className="text-xl font-semibold text-white">
+                    {member.name}
+                  </h3>
+                  {/* Accessibility Fix: Increased contrast from blue-400 to blue-300 */}
+                  <p className="mt-1 text-base text-blue-300">
+                    {member.title}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="absolute inset-x-0 bottom-0 translate-y-full transform transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+                <div className="flex items-center justify-center gap-x-4 bg-slate-900/80 p-4 backdrop-blur-sm">
+                  {/* Best Practice Fix: Added rel="noopener noreferrer" for security */}
+                  <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors" aria-label={`${member.name}'s LinkedIn`}>
+                    <Linkedin size={24} />
+                  </Link>
+                  <Link href={`mailto:${member.email}`} className="text-slate-300 hover:text-white transition-colors" aria-label={`Email ${member.name}`}>
+                    <Mail size={24} />
+                  </Link>
+                  <Link href={`/team/${member.slug}`} className="text-slate-300 hover:text-white transition-colors" aria-label={`View profile for ${member.name}`}>
+                    <ArrowUpRight size={24} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TeamSection;
+----- END FILE: C:\Users\shop\vnr-final\components\TeamSection.tsx -----
+
+
+
+📁 Directory: C:\Users\shop\vnr-final\data
+- data/
+    - contact-data.ts
+
+----- START FILE: C:\Users\shop\vnr-final\data\contact-data.ts -----
+// data/contact-data.ts
+export const faqs = [
+    { q: "Do I need an appointment?", a: "<p>While we do our best to accommodate walk-ins, we highly recommend scheduling an appointment to ensure we can dedicate the appropriate time and expertise to your specific needs without interruption.</p>" },
+    { q: "What should I bring to my first consultation?", a: "<p>For an initial consultation, it's helpful to bring any relevant financial statements, tax documents, CIPC documents, or specific correspondence you wish to discuss. This allows us to have a more productive and insightful meeting.</p>" },
+    { q: "Is there parking available?", a: "<p>Yes, there is ample and secure parking available for our clients at our offices in Eldoraigne, Centurion.</p>" },
+];
+----- END FILE: C:\Users\shop\vnr-final\data\contact-data.ts -----
+
+    - hero-slides.ts
+
+----- START FILE: C:\Users\shop\vnr-final\data\hero-slides.ts -----
+// data/hero-slides.ts
+// This file contains the data for the hero section's slides.
+// Separating data from the component allows for easier content management and future expansion.
+
+export const slidesData = [
+  {
+    id: 1,
+    imageUrl: "/images/slider/strategic-business-growth-south-africa.jpg",
+    altText: "Strategic business meeting overlooking a city skyline, representing VNR's advisory services.",
+    headline: "Clarity for Your Wealth. Confidence for Your Future.",
+    description: "Strategic tax advisory and intergenerational wealth planning for South Africa&apos;s leading families and businesses.",
+    ctaText: "Book a Free Consultation",
+    ctaHref: "/contact",
+    accreditation: "A SAIPA Accredited Firm",
+  },
+  {
+    id: 2,
+    imageUrl: "/images/services/financial-reporting-hero.jpg",
+    altText: "Financial reports and charts, symbolizing clear financial insights.",
+    headline: "Precision in Reporting. Power in Decisions.",
+    description: "Meticulous financial statements and management accounts for clear, actionable insights into your business performance.",
+    ctaText: "Explore Our Services",
+    ctaHref: "/services/financial-reporting",
+    accreditation: "Trusted Financial Insights",
+  },
+  {
+    id: 3,
+    imageUrl: "/images/services/legacy-planning-hero.jpg",
+    altText: "Family looking at a scenic view, representing legacy and future planning.",
+    headline: "Build a Legacy. Protect Your Future.",
+    description: "Comprehensive estate and intergenerational wealth planning to secure your family's prosperity for generations to come.",
+    ctaText: "Plan Your Legacy",
+    ctaHref: "/services/legacy-planning",
+    accreditation: "Expert Legacy Advisors",
+  },
+];
+
+----- END FILE: C:\Users\shop\vnr-final\data\hero-slides.ts -----
+
+    - insights-data.ts
+
+----- START FILE: C:\Users\shop\vnr-final\data\insights-data.ts -----
+// data/insights-data.ts
+import { teamData } from './team-data';
+
+export interface TocItem {
+  id: string;
+  title: string;
+}
+
+export interface Article {
+  slug: string;
+  featured: boolean;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  author: (typeof teamData)[0];
+  imageUrl: string;
+  takeaways: string[];
+  toc: TocItem[];
+  content: string;
+}
+
+export const insightsData: Article[] = [
+  {
+    slug: "from-tax-burden-to-strategic-asset",
+    featured: true,
+    title: "From Tax Burden to Strategic Asset: An Entrepreneur's Guide",
+    excerpt: "As an entrepreneur in South Africa, it’s easy to view taxation as a compliance hurdle. This guide reframes tax as a powerful strategic lever for protecting assets, fueling growth, and building sustainable wealth.",
+    category: "Taxation",
+    date: "July 14, 2025",
+    author: teamData.find(m => m.slug === 'jannie-venter')!,
+    imageUrl: "/images/insights/from-tax-burden-to-strategic-asset.jpg",
+    takeaways: [
+        "Shift your mindset from reactive tax compliance to proactive tax strategy to unlock true business value.",
+        "Use Capital Gains Tax (CGT) planning from day one to prepare for a tax-efficient and successful future exit.",
+        "Go beyond standard deductions to utilize capital allowances and structure IP correctly to improve cash flow.",
+        "Leverage trusts as a powerful tool for asset protection, legacy building, and ensuring business continuity."
+    ],
+    toc: [
+        { id: "mindset-shift", title: "From Tax Compliance to Tax Strategy" },
+        { id: "core-strategies", title: "Key Areas of Advanced Taxation" },
+        { id: "conclusion", title: "Your Next Step to Sustainable Wealth" }
+    ],
+    content: `<p class="lead">As an entrepreneur, you live and breathe growth. It’s easy to view taxation as little more than a year-end compliance hurdle. But what if you started to see it as one of the most powerful strategic levers at your disposal?</p><p>For over fifteen years, we’ve partnered with some of South Africa's most ambitious founders. We’ve seen firsthand that the most successful leaders don’t just pay tax; they plan for it. They understand that a sophisticated approach to <strong>advanced taxation in South Africa</strong> is not about finding loopholes, but about strategically structuring your affairs to protect assets, fuel growth, and ultimately, facilitate sustainable wealth.</p><h3 id="mindset-shift">Shifting Your Perspective: From Tax Compliance to Tax Strategy</h3><p>Strategic <strong>tax planning for entrepreneurs</strong> is proactive. It looks ahead. It involves making deliberate decisions today to optimize your tax position tomorrow, next year, and ten years from now. It aligns your financial structure with your business goals, whether that’s preparing for a future acquisition or creating a legacy for the next generation.</p><h3 id="core-strategies">Unlocking Growth: Key Areas of Advanced Taxation for Entrepreneurs</h3><h4>1. Capital Gains Tax (CGT): Structuring for Future Exits</h4><p>For many founders, the ultimate goal is a successful exit. Strategic CGT planning begins on day one by deciding whether assets should be held personally, in the company, or within a trust, and by establishing a clear and defensible valuation from the outset.</p><h4>2. The Role of Trusts in Asset Protection and Legacy</h4><p>As your business succeeds, your personal wealth grows. A properly structured trust is one of the most effective structures for separating your business risks from your personal assets. It is fundamental to ensuring a smooth and tax-efficient transfer of wealth to your heirs.</p><h3 id="conclusion">Your Next Step on the Path to Sustainable Wealth</h3><p>Viewing your business through the lens of strategic tax planning can fundamentally change your trajectory. The landscape of <strong>advanced taxation in South Africa</strong> is complex and constantly evolving. Contact our team for a strategic consultation to explore how we can help you achieve your goals.</p>`
+  },
+    {
+    slug: "avoiding-critical-governance-errors",
+    featured: false,
+    title: "From the SAIPA Board to Your Business: Avoiding Critical Governance Errors",
+    excerpt: "Leverage insights from a former SAIPA board member to implement robust corporate governance and avoid common pitfalls that can derail SMEs.",
+    category: "Compliance",
+    date: "July 10, 2025",
+    author: teamData.find(m => m.slug === 'charlie-naude')!,
+    imageUrl: "/images/insights/avoiding-critical-governance-errors.jpg",
+    takeaways: [ "Your Memorandum of Incorporation (MOI) is a critical, living document, not just a registration paper.", "Ignoring CIPC annual returns is the fastest way to risk company deregistration and frozen assets.", "Strictly separating business and personal finances protects you from personal liability under the 'corporate veil'.", "A comprehensive shareholder agreement is a non-negotiable 'business pre-nup' for any company with co-founders."],
+    toc: [ { id: "mistake1", title: "Mistake 1: Ignoring Your MOI" }, { id: "mistake2", title: "Mistake 2: Neglecting CIPC Compliance" }, { id: "mistake3", title: "Mistake 3: Blurring Financial Lines" }, { id: "mistake5", title: "Mistake 5: Operating Without a Shareholder Agreement" } ],
+    content: ` <p class="lead">As a founder, you wear countless hats. It’s understandable that something like <strong>corporate governance for SMEs in South Africa</strong> can feel like bureaucratic red tape. However, during my time serving on the national board of SAIPA, I’ve seen this exact mindset become the hidden vulnerability that derails otherwise thriving businesses.</p><h3 id="mistake1">1. Ignoring Your Memorandum of Incorporation (MOI)</h3><p>Many entrepreneurs see the MOI as a simple registration document to be filed and forgotten. This is a fundamental error. Your company’s MOI is its constitution. Actions taken by directors could be deemed invalid if they contravene the MOI. Treat it as a living document.</p><h3 id="mistake2">2. Neglecting Your CIPC Compliance Obligations</h3><p>The Companies and Intellectual Property Commission (CIPC) is the custodian of your company's legal status. Failing to file annual returns on time is one of the fastest ways to jeopardise your entire operation. The CIPC can assume your company is inactive and begin the deregistration process, which freezes bank accounts and forfeits assets to the state.</p><h3 id="mistake3">3. Blurring the Lines Between Personal and Company Finances</h3><p>It’s tempting to use the company bank account for a personal expense. This erodes the principle of the company being a separate legal entity. If you consistently fail to distinguish between your finances and the company's, a creditor or court could 'pierce the corporate veil,' making you personally liable for your company's debts.</p><h3 id="mistake5">5. Operating Without a Shareholder Agreement</h3><p>If you have co-founders, a comprehensive shareholder agreement is a non-negotiable 'business pre-nup.' What happens if one founder wants to leave, passes away, or there is a deadlock on a critical decision? Without an agreement, these scenarios can lead to crippling internal disputes and the potential collapse of the business.</p><h3>Your Foundation for Sustainable Success</h3><p>As a professional <strong>Charlie Naude accountant</strong>, my goal is to help entrepreneurs build businesses that are not just profitable, but enduring. That endurance begins with a solid foundation of good governance. Contact our team to ensure your governance is a source of strength, not a hidden risk.</p>`
+  },
+  {
+    slug: "guide-to-registering-your-npo",
+    featured: false,
+    title: "How to Register an NPO in South Africa: A Step-by-Step Guide",
+    excerpt: "Navigate the specific requirements for registering a Non-Profit Organisation in South Africa to unlock funding and achieve Public Benefit Organisation (PBO) status.",
+    category: "Compliance",
+    date: "July 07, 2025",
+    author: teamData.find(m => m.slug === 'henry-landsberg')!,
+    imageUrl: "/images/insights/guide-to-registering-your-npo.jpg",
+    takeaways: [ "An NPO is a formal legal entity established for a public purpose, essential for attracting major donors.", "Your first step is registering with the Department of Social Development (DSD), which requires a formal constitution.", "The most critical step for fundraising is applying to SARS for Public Benefit Organisation (PBO) status.", "Achieving Section 18A status from SARS allows you to issue tax-deductible receipts, a powerful incentive for donors."],
+    toc: [ { id: "what-is-an-npo", title: "Understanding an NPO" }, { id: "dsd-registration", title: "DSD Registration Guide" }, { id: "sars-registration", title: "Registering with SARS" }, { id: "conclusion", title: "From Passion to Professional Entity" } ],
+    content: `<p class="lead">Your mission is to make a difference. To truly grow your impact and attract donors, you need to transform that passion into a formal, recognised legal entity. This guide demystifies the <strong>NPO registration South Africa</strong> process.</p><h3 id="what-is-an-npo">Before You Begin: What is a Non-Profit Organisation?</h3><p>In South Africa, an NPO is a trust, company, or other association of persons established for a public purpose. The key characteristic is that any surplus income is used to advance that public purpose, not to be distributed to its members.</p><h3 id="sars-registration">The Essential Next Step: How to Register Your NPO with SARS</h3><p>Receiving your DSD certificate is a major milestone, but not the end of the process. To become tax-exempt and allow your donors to receive a tax deduction, you must apply to the SARS Tax Exemption Unit for Public Benefit Organisation (PBO) status.</p><ul><li><strong>PBO Status:</strong> Being an approved PBO means SARS officially recognises your organisation as operating for the public benefit, exempting it from paying income tax.</li><li><strong>The Power of Section 18A:</strong> This is the real game-changer for fundraising. Approval under Section 18A allows your organisation to issue tax-deductible receipts to donors, which is a powerful incentive for funders.</li></ul><h3 id="conclusion">From Passion to Professional Entity</h3><p>Following these steps correctly transforms your vision into a formal, credible organisation. At <strong>VNR professional accountants</strong>, we have the expertise to manage these administrative burdens, allowing you to remain focused on what truly matters: serving your community.</p>`
+  },
+  {
+    slug: "are-you-overpaying-sars-sme-tax-deductions",
+    featured: false,
+    title: "Are You Overpaying SARS? A Guide to SME Tax Deductions",
+    excerpt: "Many small businesses miss out on legitimate tax deductions. This guide covers key areas where you can optimize your expenses to improve cash flow and reduce your tax burden.",
+    category: "Taxation",
+    date: "July 01, 2025",
+    author: teamData.find(m => m.slug === 'jannie-venter')!,
+    imageUrl: "/images/insights/are-you-overpaying-sars-sme-tax-deductions.jpg",
+    takeaways: [ "Proactively claim a tax allowance for specific doubtful debts before they become fully irrecoverable.", "Deduct qualifying pre-trade expenses (Section 11A) in your first year of business operations.", "Claim wear-and-tear on personal assets (like laptops) that are used for business purposes.", "Ensure your home office and travel claims are structured correctly and supported by meticulous records."],
+    toc: [ { id: "intro", title: "Beyond Compliance" }, { id: "deductions", title: "5 Overlooked SME Tax Deductions" }, { id: "conclusion", title: "Unlocking Your Potential" } ],
+    content: `<p class="lead">Every South African business owner knows they have to pay tax. But are you certain you aren't paying more than you legally need to? The difference between a compliant business and a truly tax-efficient one often lies in the deductions you may not even know you can claim. This guide covers some of the key <strong>SME tax deductions in South Africa</strong> that are frequently missed.</p><h3 id="deductions">Five Key Deductions SMEs Often Overlook</h3><h4>1. The Doubtful Debts Allowance (Section 11(j))</h4><p>Most know they can claim for bad debts, but you can also claim a proactive allowance for doubtful debts. At year-end, you can identify specific debts you believe may not be paid and claim an allowance as a deduction in the current year, improving cash flow.</p><h4>2. Pre-Trade Expenses (Section 11A)</h4><p>Many founders incorrectly assume initial setup costs are personal expenses. Section 11A of the Income Tax Act allows a company to deduct certain qualifying expenses incurred before the commencement of trade in the first year of business.</p><h4>3. Wear and Tear on Personal Assets</h4><p>If a director or employee uses a personal asset, like a laptop or desk, for business, the company can often claim a wear-and-tear allowance on that asset. This is a legitimate way to <strong>reduce business tax legally</strong>, but it requires proper documentation to prove the arrangement to SARS.</p>`
+  },
+  {
+    slug: 'business-valuations',
+    featured: false,
+    title: 'Beyond Profit: The Key Drivers of Business Valuation in South Africa',
+    excerpt: "A company's value is more than its profit. Discover how systems, customer diversification, and governance drive the true value of your enterprise.",
+    category: "Business Growth",
+    date: "June 28, 2025",
+    author: teamData.find(m => m.slug === 'henry-landsberg')!,
+    imageUrl: "/images/insights/key-drivers-of-business-valuation.jpg",
+    takeaways: [ "A professional business valuation is a critical strategic tool for funding, planning, and exit strategies.", "Value is driven by predictable, recurring profits, not just a single year's performance.", "A diversified customer base, where no single client is dominant, significantly reduces risk and increases value.", "Documented systems and a strong management team prove that the business can operate without the owner."],
+    toc: [ { id: "why-it-matters", title: "Why Your Valuation Matters Now" }, { id: "key-drivers", title: "5 Strategies to Maximise Valuation" }, { id: "conclusion", title: "Building a More Valuable Future" } ],
+    content: `<p class="lead">As a business owner, you meticulously track revenue, but do you know what your business is truly worth? Understanding your valuation is not just for exit planning; it's a powerful strategic tool. A <strong>business valuation in South Africa</strong> is not a static number—it’s a dynamic score that you can actively improve.</p><h3 id="key-drivers">5 Actionable Strategies to Maximise Your Business Valuation</h3><p>A potential buyer isn't just buying your past performance; they are buying your future potential. The less risky and more predictable that future looks, the more valuable your business is.</p><h4>1. Build a Predictable Profit Engine</h4><p>Consistent, predictable profitability is the bedrock of a high valuation. Focus on recurring revenue models like service contracts and retainers, which are more valuable than one-off projects.</p><h4>2. Diversify Your Customer Base</h4><p>If a single client accounts for 30% or more of your revenue, you have a concentration risk problem. A diversified client portfolio where no single customer represents a critical threat is seen as far less risky and therefore more valuable.</p><h4>3. Systemise Your Operations</h4><p>A business that is heavily dependent on its owner is difficult to sell. The goal is to create a business that can run smoothly without your constant involvement by documenting key processes and implementing robust software.</p>`
+  },
+  {
+    slug: "guide-to-avoiding-sars-penalties",
+    featured: false,
+    title: "Is Your Business Compliant? A Guide to Avoiding SARS Penalties",
+    excerpt: "A practical guide for business owners on their key compliance obligations for Income Tax, VAT, and PAYE to avoid costly penalties from SARS.",
+    category: "Taxation",
+    date: "June 25, 2025",
+    author: teamData.find(m => m.slug === 'jannie-venter')!,
+    imageUrl: "/images/insights/guide-to-avoiding-sars-penalties.jpg",
+    takeaways: [ "A valid Tax Compliance Status (TCS) is essential for applying for tenders and securing finance in South Africa.", "Provisional Tax (IRP6) is due twice a year and requires a careful estimate to avoid penalties.", "VAT (VAT201) returns are typically due bi-monthly and require meticulous record-keeping for all claims.", "Late submission of any return results in administrative penalties, while inaccuracies can lead to more severe understatement penalties."],
+    toc: [ { id: "why-comply", title: "Why Good Standing Matters" }, { id: "checklist", title: "SARS Compliance Checklist" }, { id: "penalties", title: "Understanding Penalties" } ],
+    content: `<p class="lead">This guide provides a clear, practical overview of the core obligations your SME needs to manage in 2025.</p><h3 id="why-comply">Why Good Standing with SARS Matters</h3><p>Timely and accurate compliance is more than just a legal requirement. A Tax Compliance Status (TCS) pin is a golden key in the world of business. You need it to apply for tenders, secure financing from banks, and even to receive government grants.</p><h3 id="checklist">Your Essential Checklist for SARS Compliance</h3><h4>1. Provisional Tax (IRP6)</h4><p>This is a mechanism to pay your annual income tax liability in advance. For most businesses, the first payment is due by August 31st and the second is due by your financial year-end.</p><h4>2. Value-Added Tax (VAT201)</h4><p>If you are a registered VAT vendor, this return is typically filed bi-monthly. It declares your total sales (output tax) and your total qualifying business expenses (input tax).</p><h4>3. Company Income Tax (IT14)</h4><p>This is the final annual declaration of your company’s financial performance for its full financial year. It reconciles your provisional payments with your actual figures and is due 12 months after your financial year-end.</p>`
+  },
+  {
+    slug: "how-to-restore-your-dormant-company",
+    featured: false,
+    title: "Company Deregistered? A Guide to Restore Your Dormant CC",
+    excerpt: "If your company has been deregistered by the CIPC due to non-filing of annual returns, there is a process to restore it. This is your step-by-step guide.",
+    category: "Compliance",
+    date: "June 22, 2025",
+    author: teamData.find(m => m.slug === 'henry-landsberg')!,
+    imageUrl: "/images/insights/how-to-restore-your-dormant-company.jpg",
+    takeaways: [ "Deregistration is most often caused by failing to file CIPC annual returns for two or more consecutive years.", "The first and most critical step to re-instatement is to bring all outstanding annual returns up to date.", "The formal application is made using Form CoR 40.5, along with a signed affidavit and other supporting documents.", "You must provide proof that the company was still active or held assets at the time of deregistration."],
+    toc: [ { id: "root-cause", title: "Why Was My Company Deregistered?" }, { id: "reactivation-steps", title: "How to Reactivate a Company" }, { id: "conclusion", title: "Getting Back on Track" } ],
+    content: `<p class="lead">It’s a scenario that causes immediate panic for any business owner. You attempt to access your company’s bank account, only to be informed that your business no longer legally exists because it has been 'deregistered'. In most cases, this is reversible if you act correctly.</p><h3 id="root-cause">Why Was My Company Deregistered?</h3><p>The most common reason for the CIPC to deregister a business is a failure to file annual returns. Every company and CC in South Africa must file an annual return to confirm it is still active. If you fail to do this for two or more consecutive years, the CIPC assumes your business is inactive and will initiate the deregistration process.</p><h3 id="reactivation-steps">How to Reactivate a Company with CIPC</h3><p>The process of bringing your company back to life is known as 're-instatement'. It requires meticulous attention to detail. The first step is to bring all outstanding annual returns up to date. The formal application is made using Form CoR 40.5, which must be submitted with supporting documents, including a certified affidavit and proof that the company was active or held assets at the time of deregistration.</p>`
+  },
+  {
+    slug: "building-sustainable-wealth-in-south-africa",
+    featured: false,
+    title: "From Success to Significance: Building Sustainable Wealth",
+    excerpt: "True wealth isn't just about financial success; it's about building a lasting, purposeful legacy. Explore the strategic shift from earning income to creating sustainable wealth.",
+    category: "Legacy Planning",
+    date: "June 19, 2025",
+    author: teamData.find(m => m.slug === 'charlie-naude')!,
+    imageUrl: "/images/insights/building-sustainable-wealth-in-south-africa.jpg",
+    takeaways: [ "Sustainable wealth is not just about accumulation, but about resilience, protection, and purpose.", "It requires a holistic approach that integrates tax planning, asset protection, and legacy planning into a single strategy.", "Strategic tax planning is a tool for maximizing the capital you have available for growth and preservation.", "An intentional legacy plan ensures the value you’ve created provides for your family and serves a purpose beyond your own lifetime."],
+    toc: [ { id: "redefining-wealth", title: "Redefining Wealth" }, { id: "the-three-pillars", title: "The Three Pillars of Sustainable Wealth" }, { id: "conclusion", title: "A Journey of Strategic Decisions" } ],
+    content: `<p class="lead">As an entrepreneur, you've mastered building value. But once you’ve achieved success, the questions change. Is your wealth built to last? Does it serve a purpose beyond your lifetime? The focus must shift from simply generating income to building sustainable wealth.</p><h3 id="the-three-pillars">The Three Pillars of Sustainable Wealth</h3><h4>Pillar 1: Strategic Tax Planning for Long-Term Growth</h4><p>This reframes tax from a liability into a strategic tool. It’s about structuring your affairs to ensure every rand of profit is working as hard as it can for your long-term vision, creating the surplus capital needed to build and protect your asset base.</p><h4>Pillar 2: Proactive Asset Protection for Ultimate Resilience</h4><p>In a volatile world, wealth is always at risk. Proactive asset protection is the art of building firewalls between your different assets and liabilities. It involves using legal structures like trusts to insulate your personal wealth from your business risks.</p><h4>Pillar 3: Intentional Legacy and Succession Planning</h4><p>What is the ultimate purpose of your wealth? This pillar goes far beyond a simple will. It involves creating a deliberate, documented plan for the smooth transition of your assets and your leadership.</p>`
+  },
+  {
+    slug: "sage-vs-xero-south-african-guide",
+    featured: false,
+    title: "Sage or Xero? A South African Business Leader’s Guide",
+    excerpt: "A high-level strategic guide for business leaders comparing the pros and cons of Sage and Xero within the specific context of the South African market.",
+    category: "Technology",
+    date: "June 16, 2025",
+    author: teamData.find(m => m.slug === 'charlie-naude')!,
+    imageUrl: "/images/insights/sage-vs-xero-south-african-guide.jpg",
+    takeaways: [ "The choice between Sage and Xero is a foundational technology decision for any modern South African business.", "Xero is often praised for its user-friendly interface, making it ideal for business owners who are not accounting professionals.", "Sage offers a deeply integrated and robust South African payroll system, a key differentiator in the local market.", "The best platform depends on your specific needs, but the right implementation partner is as critical as the software itself."],
+    toc: [ { id: "intro", title: "Why This Decision Matters" }, { id: "comparison", title: "Sage vs Xero Comparison" }, { id: "making-choice", title: "Making the Right Choice" } ],
+    content: `<p class="lead">In 2025, the conversation is no longer if you should use cloud accounting, but which platform is the right engine for your business's growth. When it comes to <strong>Sage vs Xero in South Africa</strong>, the choice is significant. As certified partners for both, this is our practical guide to making that critical decision.</p><h3 id="comparison">A Head-to-Head Comparison</h3><h4>User Experience (UX)</h4><p>Xero is famous for its clean, intuitive interface. Sage has made enormous strides in modernising its UX, offering a robust and comprehensive environment.</p><h4>South African Payroll</h4><p>This is a major differentiator. Sage's payroll is deeply integrated and specifically designed for complex local tax laws. Xero's native payroll is less established locally.</p><h4>Scalability</h4><p>Xero is fantastic for service-based SMEs. Sage's architecture excels at handling greater complexity, such as manufacturing or detailed inventory tracking, making it highly scalable.</p>`
+  },
+  {
+    slug: "your-will-the-ultimate-business-continuity-plan",
+    featured: false,
+    title: "A Business Owner’s Guide to Drafting a Will in South Africa",
+    excerpt: "For an entrepreneur, a will is not just a personal document. It is your final, and most critical, business continuity plan. Learn how to protect your business and family.",
+    category: "Legacy Planning",
+    date: "June 13, 2025",
+    author: teamData.find(m => m.slug === 'jannie-venter')!,
+    imageUrl: "/images/insights/your-will-the-ultimate-business-continuity-plan.jpg",
+    takeaways: [ "For an entrepreneur, a will is the most critical business continuity plan you will ever create.", "A standard, off-the-shelf will is wholly inadequate for a business owner's complex needs.", "Your will must clearly address the transfer of ownership (shares) and control (management).", "Your will and shareholder agreement must align perfectly to prevent crippling legal disputes."],
+    toc: [ { id: "intro", title: "Why a Standard Will Fails" }, { id: "critical-questions", title: "5 Critical Questions to Address" }, { id: "conclusion", title: "Your Final Act of Stewardship" } ],
+    content: `<p class="lead">You have a plan for marketing, sales, and operations. But do you have a plan for how your business will survive without you? For an entrepreneur, the process of <strong>drafting a will in South Africa</strong> is not just personal; it is the most critical business continuity plan.</p><h3 id="critical-questions">5 Critical Questions Every Business Owner's Will Must Address</h3><h4>1. The Question of Ownership: Who Inherits Your Shares?</h4><p>Are you leaving shares to a single heir or dividing them? Could this create shareholder disputes that paralyse the company? A clear decision on the transfer of ownership is the starting point.</p><h4>2. The Question of Control: Who Takes the Helm?</h4><p>Ownership and management are not the same. Your will can nominate a trusted business partner or key employee to take on a leadership role, or give your executor the power to appoint a professional manager.</p><h4>3. The Question of Liquidity: How Will Estate Costs Be Paid?</h4><p>When you pass away, your estate must pay its debts and taxes. If your primary asset is the business, where will your executor find the cash? Strategic planning is needed to provide liquidity and prevent a forced sale.</p>`
+  },
+  {
+    slug: "guide-to-payroll-compliance-emp201-irp5",
+    featured: false,
+    title: "The Ultimate Payroll Compliance Checklist for SA Businesses",
+    excerpt: "A technical guide for business owners covering the full spectrum of payroll compliance, including monthly EMP201 submissions and the bi-annual IRP5 reconciliation.",
+    category: "Compliance",
+    date: "June 10, 2025",
+    author: teamData.find(m => m.slug === 'henry-landsberg')!,
+    imageUrl: "/images/insights/guide-to-payroll-compliance-emp201-irp5.jpg",
+    takeaways: [ "Payroll is more than paying salaries; it's a legal obligation with significant compliance risk.", "Monthly EMP201 submissions for PAYE, UIF, and SDL are due by the 7th of the following month.", "Bi-annual EMP501 reconciliations are required to match your monthly payments with your payroll data.", "Annual duties include issuing IRP5/IT3(a) certificates to all employees and filing your COID Return of Earnings."],
+    toc: [ { id: "why-it-matters", title: "Why Payroll Compliance is Non-Negotiable" }, { id: "checklist", title: "The Ultimate Payroll Checklist" }, { id: "conclusion", title: "From Checklist to Peace of Mind" } ],
+    content: `<p class="lead">Hiring your first employees is a significant milestone. The moment you do, however, you take on one of the most complex and critical areas of business administration: payroll. This is your essential checklist for <strong>payroll compliance in South Africa</strong>.</p><h3 id="checklist">The Ultimate Payroll Compliance Checklist</h3><h4>✅ Your Monthly Payroll Cycle</h4><p>These tasks must be completed accurately every single month. This includes calculating gross salaries, processing all deductions, issuing payslips, and making the crucial <strong>SARS EMP201 submission</strong> by the 7th of the following month.</p><h4>✅ Your Bi-Annual Reconciliation</h4><p>Twice a year, you need to reconcile what you’ve paid to SARS with your payroll records. The interim EMP501 reconciliation covers March to August (due by Oct 31st), and the final reconciliation covers the full tax year (due by May 31st).</p>`
+  },
+  {
+    slug: "facing-a-sars-dispute-step-by-step-guide",
+    featured: false,
+    title: "Facing a SARS Dispute? A Step-by-Step Guide for Businesses",
+    excerpt: "Receiving a letter from SARS can be stressful. We provide a clear, step-by-step guide on how to handle disputes, objections, and appeals professionally.",
+    category: "Taxation",
+    date: "June 07, 2025",
+    author: teamData.find(m => m.slug === 'jannie-venter')!,
+    imageUrl: "/images/insights/facing-a-sars-dispute-step-by-step-guide.jpg",
+    takeaways: [ "Act quickly. The Tax Administration Act imposes strict deadlines, typically 30 business days, to dispute an assessment.", "Always submit a 'Request for Reasons' first if SARS's assessment is unclear. This is a critical strategic step.", "The burden of proof is on you, the taxpayer, to prove that the SARS assessment is incorrect with a formal, evidence-based objection.", "Simultaneously lodge a 'Request for Suspension of Payment' to protect your cash flow during the dispute process."],
+    toc: [ { id: "golden-rule", title: "The Golden Rule: Act Quickly" }, { id: "dispute-pathway", title: "The Dispute Pathway" }, { id: "conclusion", title: "Your Strongest Case Forward" } ],
+    content: `<p class="lead">Receiving an unexpected tax assessment from SARS can be intimidating. However, it's important to remember this is not a fight; it is a formal legal process with clear rules. Understanding how to navigate the <strong>SARS dispute resolution in South Africa</strong> is the first step toward a successful outcome.</p><h3 id="dispute-pathway">The Dispute Pathway: A Step-by-Step Guide</h3><h4>Step 1: Request for Reasons</h4><p>If the assessment notice is unclear, your first step should be a formal 'Request for Reasons'. This forces SARS to provide a written explanation of their legal and factual grounds, allowing your advisor to craft a targeted and effective response.</p><h4>Step 2: Mastering the SARS Objection Process</h4><p>Once you have the reasons, you can lodge a formal Notice of Objection (NOO). The burden of proof rests on you to show that the SARS assessment is incorrect. This requires a well-reasoned legal argument supported by a comprehensive bundle of evidence.</p>`
+  },
+  {
+    slug: "role-of-trusts-in-2025",
+    featured: false,
+    title: "Asset Protection, Tax, and Legacy: The Role of Trusts in 2025",
+    excerpt: "Are trusts still a relevant tool for asset protection and estate planning in South Africa? We explore the key benefits and strategic uses of trusts in the modern financial landscape.",
+    category: "Legacy Planning",
+    date: "June 04, 2025",
+    author: teamData.find(m => m.slug === 'charlie-naude')!,
+    imageUrl: "/images/insights/role-of-trusts-in-2025.jpg",
+    takeaways: [ "The primary benefit of a trust is asset protection, creating a firewall between business risks and personal assets.", "Assets in a trust fall outside your personal estate, avoiding executor's fees and ensuring a seamless transfer of wealth.", "A trust is a sophisticated legal structure that demands professional drafting and administration to be effective."],
+    toc: [ { id: "modern-role", title: "The Modern Role of the Trust" }, { id: "core-benefits", title: "The Enduring Benefits of a Trust" }, { id: "tax-question", title: "Addressing the Tax Question" } ],
+    content: `<p class="lead">After years of legislative changes and increased scrutiny from SARS, many business owners are asking: are trusts still worth it? The short answer is a resounding yes. However, the reasons why a trust is so valuable have evolved. A trust is no longer a simple tax loophole; it is a sophisticated strategic structure for protection and legacy.</p><h3 id="core-benefits">The Enduring Benefits of a Trust in South Africa</h3><h4>1. The Ultimate Fortress: Unparalleled Asset Protection</h4><p>This is the number one reason to form a trust. It builds a powerful firewall between your personal wealth and your business risks. If your business faces financial difficulty, the assets held within the trust are protected from business creditors.</p><h4>2. The Seamless Handover: Superior Estate Planning</h4><p>Assets held in a trust fall completely outside of your personal estate. They are not frozen upon your death and are not subject to executor's fees or Estate Duty, ensuring a smooth, cost-effective transfer of wealth to the next generation.</p>`
+  },
+  {
+    slug: "the-true-cost-of-diy-accounting",
+    featured: false,
+    title: "Penny Wise, Pound Foolish? The True Cost of DIY Accounting",
+    excerpt: "Trying to save money by doing your own accounting can lead to much greater costs and risks down the line. We break down the hidden dangers of DIY bookkeeping.",
+    category: "Business Growth",
+    date: "June 01, 2025",
+    author: teamData.find(m => m.slug === 'henry-landsberg')!,
+    imageUrl: "/images/insights/the-true-cost-of-diy-accounting.jpg",
+    takeaways: [ "The opportunity cost of a founder's time spent on bookkeeping is often the biggest hidden expense.", "DIY accounting mistakes in payroll or VAT can lead to direct and significant SARS penalties.", "Without expert knowledge, you will miss legitimate tax deductions, causing you to overpay.", "Making strategic decisions without professional management accounts and cash flow projections is 'flying blind'."],
+    toc: [ { id: "intro", title: "The Founder's Dilemma" }, { id: "hidden-costs", title: "The Five Hidden Costs" }, { id: "conclusion", title: "An Investment in Growth" } ],
+    content: `<p class="lead">In the early days, managing the books yourself seems like a sensible way to save money. But as your business grows, a crucial tipping point is reached where a DIY approach starts costing you more than it saves. These hidden costs add up far more quickly than you might think.</p><h3 id="hidden-costs">The Five Hidden Costs of DIY Accounting</h3><h4>1. The Cost of Your Time</h4><p>Your time is the most valuable asset in your business. Every hour you spend on bookkeeping is an hour you are not spending on what actually grows the business: strategy, sales, and team leadership.</p><h4>2. The Cost of Errors (SARS Penalties)</h4><p>The South African tax landscape is unforgiving. Common <strong>DIY accounting mistakes</strong>, such as miscalculating VAT or payroll, create direct costs in the form of SARS penalties and interest that eat directly into your profits.</p>`
+  },
+  {
+    slug: "startup-accounting-to-exit-strategy",
+    featured: false,
+    title: "Startup Accounting to Exit Strategy: A Founder's Financial Roadmap",
+    excerpt: "A comprehensive financial roadmap for founders, covering the essential accounting milestones from initial setup to preparing your business for a successful exit.",
+    category: "Business Growth",
+    date: "May 28, 2025",
+    author: teamData.find(m => m.slug === 'charlie-naude')!,
+    imageUrl: "/images/insights/startup-accounting-to-exit-strategy.jpg",
+    takeaways: [ "Your business's financial function is not static; it must evolve through distinct milestones.", "Startup accounting focuses on foundational compliance: formal registration, separate bank accounts, and choosing cloud software.", "The growth phase introduces new complexities like mandatory VAT registration and formal payroll.", "Scaling requires a move to strategic finance, including management accounts and advanced tax planning."],
+    toc: [ { id: "milestone1", title: "Milestone 1: The Launchpad" }, { id: "milestone2", title: "Milestone 2: Gaining Traction" }, { id: "milestone3", title: "Milestone 3: The Scale-Up" }, { id: "milestone4", title: "Milestone 4: Realizing Value" } ],
+    content: `<p class="lead">The accounting system that served you on day one will not be sufficient on day one thousand. The most successful entrepreneurs are those who don't just react to their current financial needs; they anticipate the challenges and opportunities of the stage that lies ahead. This is your financial roadmap.</p><h3 id="milestone1">Milestone 1: The Launchpad – Startup Accounting</h3><p>In the beginning, your focus is on survival and proof of concept. Your financial needs are foundational: formal company registration, a separate bank account, choosing cloud accounting software, and developing a consistent process for basic bookkeeping.</p><h3 id="milestone2">Milestone 2: Gaining Traction – Managing Growth</h3><p>You have consistent revenue and you're hiring. This exciting phase brings new compliance burdens. You must plan for mandatory VAT registration once your turnover approaches the R1 million threshold, and the moment you hire your first employee, you must implement a formal, compliant payroll system.</p>`
+  }
+];
+----- END FILE: C:\Users\shop\vnr-final\data\insights-data.ts -----
+
+    - services-data.ts
+
+----- START FILE: C:\Users\shop\vnr-final\data\services-data.ts -----
+// data/services-data.ts
+import { teamData } from './team-data';
+
+export interface FAQ {
+  q: string;
+  a: string;
+}
+
+export interface Service {
+  slug: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  icon: string; // Restored for the main services page
+  details: string[]; // Restored for the main services page
+  leadExpert: (typeof teamData)[0];
+  content: string;
+  faqs: FAQ[];
+}
+
+export const servicesData: Service[] = [
+  {
+    slug: 'tax-advisory',
+    title: 'Tax Advisory & Compliance',
+    subtitle: 'Expert tax planning and SARS compliance services in Centurion to minimize your tax burden and ensure financial peace of mind.',
+    imageUrl: '/images/services/tax-advisory-hero.jpg',
+    icon: 'Scale',
+    details: ['Individual & Corporate Tax Returns', 'Provisional Tax Submissions', 'VAT, PAYE, SDL, UIF Compliance', 'SARS Dispute Resolution'],
+    leadExpert: teamData.find(m => m.slug === 'jannie-venter')!,
+    content: `<p class="text-lg text-slate-600 mb-6">Navigating the South African tax landscape requires more than just compliance; it demands strategic foresight. Our tax advisory services are designed to align your tax strategy with your business objectives, ensuring efficiency while mitigating risk.</p>`,
+    faqs: [
+        { q: 'Who needs to file a tax return in South Africa?', a: 'Any individual who earns above the tax threshold, or runs a business, must file a tax return. We provide expert guidance for all scenarios.' },
+        { q: 'What is the difference between tax avoidance and tax evasion?', a: 'Tax avoidance is the legal use of tax laws to reduce one\'s tax burden, which we specialize in. Tax evasion is the illegal non-payment of taxes.' },
+    ],
+  },
+  {
+    slug: 'business-structuring',
+    title: 'Business Structuring',
+    subtitle: 'Architecting the optimal legal and financial structure for your enterprise to support growth, manage risk, and ensure CIPC compliance.',
+    imageUrl: '/images/services/business-structuring-hero.jpg',
+    icon: 'Building2',
+    details: ['New Company Registrations (Pty, NPC)', 'CIPC Amendments & Annual Returns', 'Trust Formation & Administration', 'Complex Enterprise Valuations'],
+    leadExpert: teamData.find(m => m.slug === 'charlie-naude')!,
+    content: `<p class="text-lg text-slate-600 mb-6">The structure of your business is its foundation. A robust structure facilitates growth, protects assets, and ensures long-term viability. We provide expert guidance on creating and maintaining the optimal framework for your vision.</p>`,
+    faqs: [
+        { q: 'What is the best legal structure for my new business?', a: 'The optimal structure (e.g., Sole Proprietor, Pty Ltd) depends on your liability, tax implications, and growth plans. We provide tailored advice to help you choose correctly.' },
+        { q: 'How do I ensure my company remains CIPC compliant?', a: 'Annual returns must be filed and any changes to directors or company information must be registered. We manage this entire process to ensure you remain compliant.' },
+    ],
+  },
+  {
+    slug: 'legacy-planning',
+    title: 'Estate & Legacy Planning',
+    subtitle: 'Ensuring your wealth is protected and seamlessly transferred for generations to come through meticulous, long-term planning.',
+    imageUrl: '/images/services/legacy-planning-hero.jpg',
+    icon: 'GitBranchPlus',
+    details: ['Drafting of Last Will & Testament', 'Intergenerational Wealth Transfer', 'Executor Services', 'Trust & Estate Administration'],
+    leadExpert: teamData.find(m => m.slug === 'charlie-naude')!,
+    content: `<p class="text-lg text-slate-600 mb-6">True wealth is generational. Our legacy planning services focus on creating robust structures that protect your assets and ensure your vision is carried forward, providing security for your family and continuity for your business.</p>`,
+    faqs: [
+        { q: 'Why is a professional executor important?', a: 'An independent, professional executor ensures your estate is administered impartially, efficiently, and in accordance with the law, preventing potential family disputes and delays.' },
+    ],
+  },
+  {
+    slug: 'financial-reporting',
+    title: 'Financial Reporting',
+    subtitle: 'Meticulous preparation of financial statements and management accounts for clear, actionable insights and full compliance.',
+    imageUrl: '/images/services/financial-reporting-hero.jpg',
+    icon: 'FileText',
+    details: ['Annual Financial Statements (AFS)', 'Management Statements', 'Independent Reviews', 'Performance Analysis'],
+    leadExpert: teamData.find(m => m.slug === 'henry-landsberg')!,
+    content: `<p class="text-lg text-slate-600 mb-6">Accurate financial reporting is the bedrock of strategic business decisions. We provide clear, compliant, and insightful reports that allow you to understand performance, secure financing, and plan for the future with confidence.</p>`,
+    faqs: [
+        { q: 'What is the difference between AFS and Management Statements?', a: 'AFS are formal, year-end reports for external stakeholders like banks and SARS. Management Statements are internal reports for real-time decision-making.' },
+    ],
+  },
+  {
+    slug: 'payroll-administration',
+    title: 'Payroll Administration',
+    subtitle: 'Comprehensive payroll solutions to ensure your team is paid accurately and on time, while maintaining full SARS & Labour Law compliance.',
+    imageUrl: '/images/services/payroll-hero.jpg',
+    icon: 'UserCheck',
+    details: ['Monthly Payroll Processing', 'Payslip Generation', 'EMP201 & EMP501 Submissions', 'UIF & COID Compliance'],
+    leadExpert: teamData.find(m => m.slug === 'henry-landsberg')!,
+    content: `<p class="text-lg text-slate-600 mb-6">Managing payroll is a critical but time-consuming task. Our comprehensive administration services remove this burden, ensuring accuracy, confidentiality, and full compliance with SARS and the Department of Labour.</p>`,
+    faqs: [
+        { q: 'What is an EMP501 reconciliation?', a: 'It is a bi-annual declaration to SARS reconciling the payroll taxes (PAYE, SDL, UIF) declared and paid for all employees during a specific period. Accuracy is critical to avoid penalties.' },
+    ],
+  },
+  {
+    slug: 'cloud-accounting',
+    title: 'Cloud Accounting',
+    subtitle: 'Modernizing your financial operations with leading cloud platforms like Sage and XERO for unparalleled efficiency and real-time data.',
+    imageUrl: '/images/services/cloud-accounting-hero.jpg',
+    icon: 'Cloud',
+    details: ['Sage Platinum Partner Services', 'XERO & DEXT Integration', 'Software Setup & Training', 'Workflow Automation'],
+    leadExpert: teamData.find(m => m.slug === 'charlie-naude')!,
+    content: `<p class="text-lg text-slate-600 mb-6">Leverage the power of the cloud for real-time financial insights, streamlined workflows, and enhanced collaboration. As a Sage Platinum Partner, we are experts in migrating and optimizing your accounting systems for the digital age.</p>`,
+    faqs: [
+      { q: 'Which accounting software is right for me?', a: 'The best software depends on your business size, industry, and specific needs. As a Sage Platinum Partner and Xero expert, we can guide you to the perfect solution.' },
+    ],
+  }
+];
+----- END FILE: C:\Users\shop\vnr-final\data\services-data.ts -----
+
+    - team-data.ts
+
+----- START FILE: C:\Users\shop\vnr-final\data\team-data.ts -----
+// data/team-data.ts
+
+export interface TeamMember {
+  slug: string;
+  name: string;
+  title: string;
+  intro: string;
+  email: string;
+  linkedinUrl: string;
+  imageUrl: string;
+  credentials: string[];
+  articles: { title: string; category: string; url: string }[];
+  bio: string;
+}
+
+export const teamData: TeamMember[] = [
+  {
+    slug: "jannie-venter",
+    name: "Jannie Venter",
+    title: "Co-Founder & Director",
+    intro: "With a postgraduate certification in Advanced Taxation, Jannie is a leading expert in tax advisory, helping clients navigate complex fiscal landscapes with strategic foresight.",
+    email: "jannie@vnr.co.za",
+    linkedinUrl: "https://www.linkedin.com/in/jannie-venter/",
+    imageUrl: "/images/team/jannie-venter.jpg",
+    credentials: [
+      "B.Com Hons (Taxation)",
+      "Professional Accountant (SA)",
+      "Registered Tax Practitioner (SARS)",
+      "Certified Independent Reviewer"
+    ],
+    articles: [
+       { title: "The 2025 Tax Season: Key Changes", category: "Taxation", url: "/insights/2025-tax-changes" },
+       { title: "Maximizing Your Deductible Expenses", category: "Taxation", url: "/insights/deductible-expenses-guide" },
+    ],
+    bio: `
+      <p>As a co-founder of VNR, Jannie Venter is a specialist in the field of taxation, renowned for his ability to translate complex regulations into actionable strategies for high-net-worth individuals and corporations.</p>
+      <h3>Areas of Expertise</h3>
+      <ul>
+        <li>Corporate & Personal Tax Planning</li>
+        <li>SARS Dispute Resolution</li>
+        <li>VAT & Indirect Taxes</li>
+        <li>Advanced Tax Structures</li>
+      </ul>
+    `
+  },
+  {
+    slug: "charlie-naude",
+    name: "Charlie Naudé",
+    title: "Co-Founder & Director",
+    intro: "A forward-thinking leader dedicated to shaping the future of the accounting profession and empowering businesses through strategic governance and financial expertise.",
+    email: "charlie@vnr.co.za",
+    linkedinUrl: "https://www.linkedin.com/in/charlie-naude/",
+    imageUrl: "/images/team/charlie-naude.jpg",
+    credentials: [
+      "B.Com Hons (Financial Accounting)",
+      "Professional Accountant (SA)",
+      "Registered Tax Practitioner (SARS)",
+      "Former Vice-Chairman, SAIPA National Board",
+    ],
+    articles: [
+      { title: "Is Your Business Ready for a Digital Transformation?", category: "Technology", url: "/insights/digital-transformation-readiness" },
+      { title: "5 Common Mistakes in Estate Planning", category: "Legacy Planning", url: "/insights/estate-planning-mistakes" },
+    ],
+    bio: `
+      <p>As a co-founder of VNR, Charlie Naudé embodies the firm's core philosophy that "ability should be rewarded." His career is a testament to this belief, marked by academic excellence, professional achievement, and a profound commitment to serving both his clients and his profession.</p>
+      <h3>A Foundation of Excellence</h3>
+      <p>Charlie's journey began with a strong academic foundation, earning both a B.Com in Accounting and a B.Com Hons in Financial Accounting from the prestigious North-West University. This rigorous education provided the bedrock for a career dedicated to financial precision and strategic insight.</p>
+    `
+  },
+  {
+    slug: "henry-landsberg",
+    name: "Henry Landsberg",
+    title: "Accounting & Tax Manager",
+    intro: "An award-winning professional, Henry manages our accounting and compliance divisions, ensuring meticulous accuracy and operational efficiency for our clients.",
+    email: "henry@vnr.co.za",
+    linkedinUrl: "https://www.linkedin.com/in/henry-landsberg/",
+    imageUrl: "/images/team/henry-landsberg.jpg",
+    credentials: [
+      "B.Com (Financial Management)",
+      "Professional Accountant (SA)",
+      "Registered Tax Practitioner (SARS)",
+      "SAIPA National Top Achiever 2017"
+    ],
+    articles: [
+      { title: "Understanding Your Management Accounts", category: "Business Growth", url: "/insights/understanding-management-accounts" },
+      { title: "CIPC Compliance: Are You at Risk?", category: "Compliance", url: "/insights/cipc-compliance-risk" },
+    ],
+    bio: `
+      <p>Henry Landsberg is a cornerstone of the VNR team, managing the accounting and tax divisions with precision and a client-focused mindset.</p>
+      <h3>Areas of Expertise</h3>
+      <ul>
+        <li>Financial Statement Preparation</li>
+        <li>Management Accounting</li>
+        <li>Payroll Administration</li>
+        <li>CIPC and Secretarial Duties</li>
+      </ul>
+    `
+  }
+];
+----- END FILE: C:\Users\shop\vnr-final\data\team-data.ts -----
+
